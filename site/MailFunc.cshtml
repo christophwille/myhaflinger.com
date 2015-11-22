@@ -1,0 +1,22 @@
+﻿@{
+    // http://www.mikesdotnetting.com/article/220/posting-data-with-jquery-ajax-in-asp-net-razor-web-pages
+
+    string json;
+    using (var reader = new StreamReader(Request.InputStream))
+    {
+        json = reader.ReadToEnd();
+    }
+    var mm = Json.Decode<MailJson>(json);
+
+
+    if (String.IsNullOrEmpty(mm.Name) || String.IsNullOrEmpty(mm.Email) ||
+        String.IsNullOrEmpty(mm.Subject) || String.IsNullOrEmpty(mm.Message))
+    {
+        // TODO: return status code?
+    }
+    else
+    {
+        var emailSvc = new SmtpMailService(new ConfigurationService());
+        emailSvc.SendMail(mm);
+    }
+}
