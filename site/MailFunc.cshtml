@@ -17,6 +17,11 @@
     else
     {
         var emailSvc = new SmtpMailService(new ConfigurationService());
-        emailSvc.SendMail(mm);
+
+
+        string msgToSend = String.Format("Name: {0}\r\nEmail: {1}\r\nBetreff: {2}\r\nNachricht: \r\n{3}\r\n",
+            mm.Name, mm.Email, mm.Subject, mm.Message);
+
+        emailSvc.SendMail(msgToSend);
     }
 }

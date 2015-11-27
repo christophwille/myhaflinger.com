@@ -212,7 +212,7 @@ jQuery(function($) {'use strict';
 				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email wird gesendet...</p>').fadeIn() );
 			}
 		}).done(function(data){
-			form_status.html('<p class="text-success">Danke für die Nachricht. Wir werden Sie so schnell als möglich kontaktieren</p>').delay(3000).fadeOut();
+			form_status.html('<p class="text-success">Danke f&uuml;r die Nachricht. Wir werden Sie so schnell als m&ouml;glich kontaktieren</p>').delay(3000).fadeOut();
 		});
 	});
 
