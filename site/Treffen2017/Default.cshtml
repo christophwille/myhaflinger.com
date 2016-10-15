@@ -1,0 +1,109 @@
+﻿@using System.Web.Mvc
+@{
+    Layout = "~/Shared/_Layout.cshtml";
+    Page.Title = "Haflingertreffen 2017";
+    Page.Keywords = "Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Veranstaltung,Ausfahrt,Auto";
+    Page.Description = "9. Internationales Salzkammergut Haflingertreffen der Haflingerfreunde Salzkammergut in Bad Ischl und Umgebung. Anmeldung, Programm und weitere Vorabinformationen.";
+}
+
+<header id="header">
+    <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="logo"></a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="scroll active"><a href="#cta">Ank&uuml;ndigung</a></li>
+                    @*<li class="scroll"><a href="#aboutus">&Uuml;ber uns</a></li>
+                    <li class="scroll"><a href="#events">Treffen</a></li>
+                    <li class="scroll"><a href="#videos">Videos</a></li>
+                    <li class="scroll"><a href="#contact">Kontakt</a></li>*@
+                </ul>
+            </div>
+        </div><!--/.container-->
+    </nav><!--/nav-->
+</header><!--/header-->
+
+
+<section id="cta" class="wow fadeIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h2>9. Internationales Salzkammergut Haflingertreffen</h2>
+                <p>
+                    Anmeldung und Programm werden 2017 zur Verfügung stehen.
+                </p>
+            </div>
+            <div class="col-sm-3 text-right">
+                23. Juni 2017 - 25. Juni 2017
+            </div>
+        </div>
+    </div>
+</section><!--/#cta-->
+
+<section id="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title text-center wow fadeInDown">Eine Vorschau</h2>
+            @*<p class="text-center wow fadeInDown">Eine kleine Fotoauswahl von einer Probefahrt</p>*@
+        </div>
+        @*<div class="text-center">
+        <ul class="portfolio-filter">
+            <li><a class="active" href="#" data-filter="*">Alle</a></li>
+            <li><a href="#" data-filter=".creative">Creative</a></li>
+            <li><a href="#" data-filter=".corporate">Corporate</a></li>
+            <li><a href="#" data-filter=".portfolio">Portfolio</a></li>
+        </ul><!--/#portfolio-filter-->
+        </div>*@
+        <div class="portfolio-items">
+            <div class="portfolio-item creative">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" src="/treffen2017/images/portfolio/1small.jpg" alt="">
+                    <div class="portfolio-info">
+                        <a class="preview" href="/treffen2017/images/portfolio/1full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </div><!--/.portfolio-item-->
+            <div class="portfolio-item corporate portfolio">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" src="/treffen2017/images/portfolio/2small.jpg" alt="">
+                    <div class="portfolio-info">
+                        <a class="preview" href="/treffen2017/images/portfolio/2full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </div><!--/.portfolio-item-->
+            <div class="portfolio-item creative">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" src="/treffen2017/images/portfolio/3small.jpg" alt="">
+                    <div class="portfolio-info">
+                        <a class="preview" href="/treffen2017/images/portfolio/3full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </div><!--/.portfolio-item-->
+            <div class="portfolio-item corporate">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" src="/treffen2017/images/portfolio/4small.jpg" alt="">
+                    <div class="portfolio-info">
+                        <a class="preview" href="/treffen2017/images/portfolio/4full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </div><!--/.portfolio-item-->
+            <div class="portfolio-item corporate">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" src="/treffen2017/images/portfolio/5small.jpg" alt="">
+                    <div class="portfolio-info">
+                        <a class="preview" href="/treffen2017/images/portfolio/5full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </div><!--/.portfolio-item-->
+        </div>
+    </div><!--/.container-->
+</section><!--/#portfolio-->
