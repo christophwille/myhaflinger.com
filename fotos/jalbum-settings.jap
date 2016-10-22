@@ -1,5 +1,5 @@
 #jAlbum Project
-#Sat Oct 15 14:28:50 CEST 2016
+#Sat Oct 22 11:50:40 CEST 2016
 webPassword=
 skin.watermarkPosition=right bottom
 forceJPEGWriting=false
@@ -46,13 +46,13 @@ skin.thumbnailsVisible=false
 skin.fixedShapeThumbs=true
 skin.slideshowLoop=false
 skin.headerType=themeImage
-displayVersion=13
+displayVersion=13.5
 skin.showImageCount=true
 skin.backgroundRepeat=stretch
 skin.googleAnalytics=none
 keepXmpData=true
 skin.skipThumbnailPage=false
-skin.infoPanelVisible=true
+skin.infoPanelVisible=false
 skin.googleSiteID=
 skin.fitImages=false
 skin.downloadNonImages=false
@@ -120,7 +120,7 @@ skin.enableKeyboard=true
 skin.debugMode=false
 suppressIEWarnings=true
 skin.disqusAppId=
-videoParameters=-y\=,-i\=$inputPath,-vf\=hqdn3d\\\=1.5\:1.5\:6\:6\\,scale\\\=min(iw\\\\\\,trunc(iw*min($videoWidth/iw\\\\\\,$videoHeight/ih)*0.5)*2)\:min(ih\\\\\\,trunc(ih*min($videoWidth/iw\\\\\\,$videoHeight/ih)*0.5)*2)\\,unsharp\\\=3\:3\:1.0\:3\:3\:0.0\\,$normalizeOrientation,-ss\=$clipStart,-t\=$clipLength,-threads\=0,-acodec\=libvo_aacenc,-b\:a\=96k,-ac\=2,-ar\=44100,-vcodec\=libx264,-crf\=$videoQuality,-metadata\:s\:v\:0\=rotate\\\=0,-movflags\=faststart,-pix_fmt\=yuv420p,$outputPath\=
+videoParameters=-y\=,-i\=$inputPath,-vf\=hqdn3d\\\=1.5\:1.5\:6\:6\\,scale\\\=min(iw\\\\\\,trunc(iw*min($videoWidth/iw\\\\\\,$videoHeight/ih)*0.5)*2)\:min(ih\\\\\\,trunc(ih*min($videoWidth/iw\\\\\\,$videoHeight/ih)*0.5)*2)\\,unsharp\\\=3\:3\:1.0\:3\:3\:0.0\\,$normalizeOrientation,-ss\=$clipStart,-t\=$clipLength,-threads\=0,-b\:a\=96k,-ac\=2,-ar\=44100,-vcodec\=libx264,-crf\=$videoQuality,-metadata\:s\:v\:0\=rotate\\\=0,-movflags\=faststart,-pix_fmt\=yuv420p,$outputPath\=
 skin.showRegions=true
 skin.themeImagePattern=
 skin.backgroundAudioRetainPosition=true
@@ -202,7 +202,7 @@ skin.backgroundColor=\#ff222222
 skin.showStartSlideshow=true
 skin.imgCaptionTemplate=<h2>${fileLabel}</h2><div class\="comment">${comment}</div>
 skin.watermark=
-skin.shopVisible=true
+skin.shopVisible=false
 skin.showPageExcerpt=false
 skin.facebookLike=false
 skin.itemsOrder=fip
@@ -238,7 +238,7 @@ scalingMethod=ScaleSmooth
 hiResDirectory=hi-res
 skin.supportDoubleclick=false
 skin.shopCoupons=
-skin.afterLast=nextfolder
+skin.afterLast=backtoindex
 copyOriginals=true
 skin.backgroundAudioSlideshowControl=false
 skin.hoverColor=\#ffffff
@@ -275,7 +275,7 @@ skin.bodyHook=
 skin.useNoscript=true
 skin.showFolderDescription=true
 skin.shopCurrency=USD
-internalVersion=13.2.4
+internalVersion=13.5
 skin.playlist=
 skin.googleApiKey=
 useCustomVideoSettings=false
