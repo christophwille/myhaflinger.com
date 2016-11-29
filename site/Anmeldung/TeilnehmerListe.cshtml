@@ -5,9 +5,8 @@
 @{ 
     if (!User.Identity.IsAuthenticated)
     {
-
+        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
     }
-
 }
 
 <div>

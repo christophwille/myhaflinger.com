@@ -4,6 +4,8 @@
 }
 @using Newtonsoft.Json
 @using MyHaflinger.Anmeldung
+@using Microsoft.Owin.Security
+@using Microsoft.AspNet.Identity
 @{
 
     Validation.RequireField("username", "Benutzername muß eingegeben werden");
@@ -21,7 +23,12 @@
 
             if (user != null)
             {
+                var authenticationManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
+                authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
+                var identity = AuthenticationFactory.CreateIdentity(username, user.Role);
+
+                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
             }
         }
     }
