@@ -1,0 +1,53 @@
+﻿@{
+    Page.Title = "Anmeldung: Validierung der Emailadresse";
+    Layout = "~/Shared/_Layout.cshtml";
+}
+@using MyHaflinger.Anmeldung.Data
+@{
+    Validation.RequireField("emailaddress", "Emailadresse muß eingegeben werden");
+    Validation.Add("emailaddress",
+            Validator.Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$",
+            "Ungültiges Format für die Emailadresse"));
+
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            string email = Request.Form["emailaddress"];
+            string guid = Guid.NewGuid().ToString();
+
+            var ctx = DbFactory.CreateContext(this.Server);
+            ctx.RegisterEmailChallenge(email, guid, DateTime.UtcNow);
+
+
+            // TODO: send email
+            // TODO: write feedback info to user
+        }
+    }
+}
+<div>
+    Emailadresse abfragen
+    Eintragen in db
+    Email verschicken mit Anmeldelink Formular?guidfüruser
+
+
+</div>
+
+<section id="cta" class="wow fadeIn">
+    <div>
+        <form method="post">
+            @Html.ValidationSummary()
+            <div>
+                <label for="emailaddress">Emailadresse: </label>
+                <input type="text"
+                       name="emailaddress"
+                       value="@Request["emailaddress"]" />
+                @Html.ValidationMessage("emailaddress")
+            </div>
+            <div>
+                <input type="submit" value="Abschicken" class="submit" />
+            </div>
+        </form>
+    </div>
+</section>

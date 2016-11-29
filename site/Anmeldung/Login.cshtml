@@ -1,0 +1,52 @@
+﻿@{
+    Page.Title = "Anmeldung für Veranstaltungswarte";
+    Layout = "~/Shared/_Layout.cshtml";
+}
+@using Newtonsoft.Json
+@using MyHaflinger.Anmeldung
+@{
+
+    Validation.RequireField("username", "Benutzername muß eingegeben werden");
+    Validation.RequireField("password", "Passwort muß eingegeben werden");
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            string username = Request.Form["username"];
+            string password = Request.Form["password"];
+
+            var definedAccounts = JsonConvert.DeserializeObject<List<LogonUser>>(File.ReadAllText(Server.MapPath("~/App_Data/AnmeldungAccounts.json")));
+            var user = definedAccounts.FirstOrDefault(a => a.Username == username && a.Password == password);
+
+            if (user != null)
+            {
+
+            }
+        }
+    }
+}
+<section id="cta" class="wow fadeIn">
+    <div>
+        <form method="post">
+            @Html.ValidationSummary()
+            <div>
+                <label for="username">Benutzername: </label>
+                <input type="text"
+                       name="username"
+                       value="@Request["username"]" />
+                @Html.ValidationMessage("username")
+            </div>
+
+            <div>
+                <label for="password">Passwort: </label>
+                <input type="password"
+                       name="password" />
+                @Html.ValidationMessage("password")
+            </div>
+            <div>
+                <input type="submit" value="Submit" class="submit" />
+            </div>
+        </form>
+    </div>
+</section>
