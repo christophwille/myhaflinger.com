@@ -12,7 +12,7 @@ public class SmtpMailService
         _configurationService = configurationService;
     }
 
-    public bool SendMail(string mailSubject, string message, bool suppressExceptions = true)
+    public bool SendMail(string mailSubject, string message, bool isBodyHtml, bool suppressExceptions = true)
     {
         try
         {
@@ -37,6 +37,7 @@ public class SmtpMailService
             {
                 From = new MailAddress(sender),
                 Body = message,
+                IsBodyHtml = isBodyHtml,
                 Subject = mailSubject
             };
             msg.To.Add(to);
