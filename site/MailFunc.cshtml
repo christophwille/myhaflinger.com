@@ -16,12 +16,6 @@
     }
     else
     {
-        var emailSvc = new SmtpMailService(new ConfigurationService());
-
-
-        string msgToSend = String.Format("Name: {0}\r\nEmail: {1}\r\nBetreff: {2}\r\nNachricht: \r\n{3}\r\n",
-            mm.Name, mm.Email, mm.Subject, mm.Message);
-
-        emailSvc.SendMail(msgToSend);
+        MyHaflinger.MailManager.SendAnfrageFormularMail(mm);
     }
 }

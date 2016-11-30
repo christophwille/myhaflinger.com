@@ -12,7 +12,7 @@ public class SmtpMailService
         _configurationService = configurationService;
     }
 
-    public bool SendMail(string message, bool suppressExceptions = true)
+    public bool SendMail(string mailSubject, string message, bool suppressExceptions = true)
     {
         try
         {
@@ -37,7 +37,7 @@ public class SmtpMailService
             {
                 From = new MailAddress(sender),
                 Body = message,
-                Subject = "myhaflinger.com Kontaktformular"
+                Subject = mailSubject
             };
             msg.To.Add(to);
 
