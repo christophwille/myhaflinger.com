@@ -14,6 +14,12 @@ public class SmtpMailService
 
     public bool SendMail(string mailSubject, string message, bool isBodyHtml, bool suppressExceptions = true)
     {
+        string to = _configurationService.ContactFormTo;
+        return SendMail(mailSubject, message, isBodyHtml, to, suppressExceptions);
+    }
+
+    public bool SendMail(string mailSubject, string message, bool isBodyHtml, string to, bool suppressExceptions = true)
+    {
         try
         {
             string userName = _configurationService.SmtpUsername;
@@ -21,7 +27,6 @@ public class SmtpMailService
             string host = _configurationService.SmtpHost;
             string port = _configurationService.SmtpPort;
             string sender = _configurationService.MailFromAddress;
-            string to = _configurationService.ContactFormTo;
 
             int portNumeric = 25;
             Int32.TryParse(port, out portNumeric);

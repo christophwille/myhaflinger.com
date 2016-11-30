@@ -9,13 +9,13 @@ namespace MyHaflinger
 {
     public static partial class MailManager
     {
-        public static void SendStep1Mail(string urlForContinuation)
+        public static void SendStep1Mail(string urlForContinuation, string to)
         {
             string templateHtml = ReadHtmlTemplate("Anmeldung_Step1_Email.html");
             var msgToSend = Engine.Razor.RunCompile(templateHtml, "anmeldungStep1TemplateKey", null, new { LinkToForm = urlForContinuation });
 
             var emailSvc = new SmtpMailService(new ConfigurationService());
-            emailSvc.SendMail("Emailadresse validiert, Haflingertreffen Salzkammergut", msgToSend, isBodyHtml: true);
+            emailSvc.SendMail("Emailadresse validiert, Haflingertreffen Salzkammergut", msgToSend, true, to);
         }
     }
 }

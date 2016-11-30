@@ -20,7 +20,7 @@
             var ctx = DbFactory.CreateContext(this.Server);
             ctx.RegisterEmailChallenge(email, guid, DateTime.UtcNow);
 
-            MyHaflinger.MailManager.SendStep1Mail($"http://myhaflinger.com/Anmeldung/Formular?token={guid}");
+            MyHaflinger.MailManager.SendStep1Mail($"http://myhaflinger.com/Anmeldung/Formular?token={guid}", email);
 
             // TODO: write feedback info to user
         }
