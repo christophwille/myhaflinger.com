@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        @RenderSection("head", required: false)
+
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+        <link href="~/Content/tablesorter-style.css" rel="stylesheet">
+    </head>
+    <body>
+        @RenderBody()
+
+        <script src="@Href("~/Scripts/jquery-3.1.1.min.js")"></script>
+        <script src="@Href("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Href("~/Scripts/tablesorter/jquery.tablesorter.combined.min.js")"></script>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
