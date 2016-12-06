@@ -1,19 +1,57 @@
-﻿@{
-    Page.Title = "Title goes here";
+﻿@using MyHaflinger.Anmeldung.Data
+@{
+    Page.Title = "Treffenanmeldung";
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
 
     // https://www.asp.net/web-pages/overview/ui-layouts-and-themes/4-working-with-forms
-
-    // https://web.archive.org/web/20110416063426/http://ccrbu.w4yserver.at/wb/pages/home/haflingertreffen-2011online-anmeldung.php
-    // https://web.archive.org/web/20110418225741/http://ccrbu.w4yserver.at/wb/media/Haflingertreffen%202011%20downloads/2011%2002%2018%20Anmeldeformular%20Haflingertreffen%202011.pdf
-    // https://github.com/praeclarum/sqlite-net
-
     // http://www.mikesdotnetting.com/article/191/validation-in-razor-web-pages-2
+
+    // https://getbootstrap.com/css/#forms
+}
+@{
+    // TODO: Place validation constraints here
+
+    var ctx = DbFactory.CreateContext(this.Server);
+
+    // Sample: http://myhaflinger.com/Anmeldung/Formular?token=2a75f00f-9e42-4698-8f59-60a9ff56cd0e
+    string token = Request.QueryString["token"];
+    string emailAddress = ctx.GetEmailForChallengeToken(token);
+
+    if (String.IsNullOrWhiteSpace(emailAddress))
+    {
+        // TODO: error handling (invalid token)
+    }
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            // TODO: Save to database
+            // TODO: Mark token as used
+            // TODO: Send email to registrant
+        }
+    }
 }
 
-<div>
-    Alle Daten abfragen
-    Speichern
-    Email verschicken an Tlnr mit Kontoinformationen
-    sample: http://myhaflinger.com/Anmeldung/Formular?token=2a75f00f-9e42-4698-8f59-60a9ff56cd0e
-</div>
+<form class="form-horizontal">
+    @Html.ValidationSummary()
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">@emailAddress</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputName" name="inputName"  placeholder="Name" value="@Request["inputName"]">
+            @Html.ValidationMessage("inputName")
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Anmeldung abschicken</button>
+        </div>
+    </div>
+</form>
