@@ -45,5 +45,9 @@ namespace MyHaflinger.Anmeldung.Data
         // Internal data
         public bool IntPaymentReceived { get; set; }
         public string IntNotes { get; set; }
+
+        // Computed, non-persisted properties
+        [Ignore]
+        public int TotalPrice {  get { return this.GetTotalPrice(); } }
     }
 }

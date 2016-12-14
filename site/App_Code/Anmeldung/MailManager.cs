@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using RazorEngine;
 using RazorEngine.Templating;
+using MyHaflinger.Anmeldung.Data;
 
 namespace MyHaflinger
 {
@@ -16,6 +17,15 @@ namespace MyHaflinger
 
             var emailSvc = new SmtpMailService(new ConfigurationService());
             return emailSvc.SendMail("Emailadresse validiert, Haflingertreffen Salzkammergut", msgToSend, true, to);
+        }
+
+        public static bool SendNewRegInfoToRegDesk(string to, Registration reg)
+        {
+            string templateHtml = ReadHtmlTemplate("Anmeldung_New_2RegDesk.html");
+            var msgToSend = Engine.Razor.RunCompile(templateHtml, "anmeldungRegDeskInfoTemplateKey", null, reg);
+
+            var emailSvc = new SmtpMailService(new ConfigurationService());
+            return emailSvc.SendMail("Neue Anmeldung", msgToSend, true, to);
         }
     }
 }

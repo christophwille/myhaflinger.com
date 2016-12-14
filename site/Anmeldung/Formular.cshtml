@@ -21,11 +21,13 @@
     Validation.RequireField("inputLicensePlate", "Kennzeichen muß eingegeben werden");
     Validation.Add("inputParticipantsFriday",
         Validator.Required("Teilnehmer Freitag muß eingegeben werden"),
-        Validator.Integer()
+        Validator.Integer(),
+        Validator.Range(0, 10, "Wert muß größer/gleich 0 sein (und kleiner 10)")
     );
     Validation.Add("inputParticipantsSatSun",
         Validator.Required("Teilnehmer Sa/So muß eingegeben werden"),
-        Validator.Integer()
+        Validator.Integer(),
+        Validator.Range(0, 10, "Wert muß größer/gleich 0 sein (und kleiner 10)")
     );
 
     // Read post-data once, usage of Request.Form below this block is not intended
@@ -76,7 +78,9 @@
 
             // TODO: Mark token as used
             // TODO: Send email to registrant
-            // TODO: Send email to registration desk
+
+            // Send email to registration desk
+            MyHaflinger.MailManager.SendNewRegInfoToRegDesk(AnmeldungSettings.RegDeskEmailAddress, reg);
 
             nextFormAction = FormActionEnum.ShowCompletionInfo;
         }
