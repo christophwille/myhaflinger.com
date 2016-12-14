@@ -21,6 +21,7 @@ namespace MyHaflinger.Anmeldung.Data
         public AnmeldungsDbContext(string path) : base(path)
 		{
             CreateTable<EmailChallenge>();
+            CreateTable<Registration>();
         }
 
         public void RegisterEmailChallenge(string emailadress, string guid, DateTime registrationTime)
@@ -43,6 +44,17 @@ namespace MyHaflinger.Anmeldung.Data
             }
 
             return "";
+        }
+
+        public Registration RegisterParticipant(Registration reg)
+        {
+            var newKey = this.Insert(reg);
+            return reg;
+        }
+
+        public List<Registration> GetRegisteredParticipants()
+        {
+            return this.Table<Registration>().OrderByDescending(r => r.Id).ToList();
         }
     }
 }

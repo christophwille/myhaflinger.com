@@ -1,4 +1,5 @@
-﻿@{
+﻿@using MyHaflinger.Anmeldung.Data
+@{
     Page.Title = "Teilnehmerliste";
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
 }
@@ -7,6 +8,9 @@
     {
         System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
     }
+
+    var ctx = DbFactory.CreateContext(this.Server);
+    var registrations = ctx.GetRegisteredParticipants();
 }
 
 <div>
@@ -20,45 +24,24 @@
     <table id="myTable" class="tablesorter">
         <thead>
             <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
+                <th>Id</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Due</th>
-                <th>Web Site</th>
+                <th>Stadt</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Smith</td>
-                <td>John</td>
-                <td>jsmith@gmail.com</td>
-                <td>$50.00</td>
-                <td>http://www.jsmith.com</td>
-            </tr>
-            <tr>
-                <td>Bach</td>
-                <td>Frank</td>
-                <td>fbach@yahoo.com</td>
-                <td>$50.00</td>
-                <td>http://www.frank.com</td>
-            </tr>
-            <tr>
-                <td>Doe</td>
-                <td>Jason</td>
-                <td>jdoe@hotmail.com</td>
-                <td>$100.00</td>
-                <td>http://www.jdoe.com</td>
-            </tr>
-            <tr>
-                <td>Conway</td>
-                <td>Tim</td>
-                <td>tconway@earthlink.net</td>
-                <td>$50.00</td>
-                <td>http://www.timconway.com</td>
-            </tr>
+            @foreach (var r in registrations)
+            {
+                <tr>
+                    <td>@r.Id</td>
+                    <td>@r.Name</td>
+                    <td>@r.EmailAddress</td>
+                    <td>@r.City</td>
+                </tr>
+            }
         </tbody>
     </table>
-
 
 </div>
 

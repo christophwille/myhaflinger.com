@@ -1,11 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+﻿using NLog;
+using System;
 using System.Net;
 using System.Net.Mail;
 
 public class SmtpMailService
 {
     private readonly ConfigurationService _configurationService;
+    private static Logger logger = LogManager.GetCurrentClassLogger();
 
     public SmtpMailService(ConfigurationService configurationService)
     {
@@ -52,7 +53,7 @@ public class SmtpMailService
         }
         catch (Exception ex)
         {
-            Trace.TraceError(ex.ToString());
+            logger.Error(ex.ToString);
 
             if (!suppressExceptions)
                 throw;
