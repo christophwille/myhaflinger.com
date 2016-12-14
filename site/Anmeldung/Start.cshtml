@@ -4,45 +4,78 @@
 }
 @using MyHaflinger.Anmeldung.Data
 @{
+    var nextFormAction = FormActionEnum.ShowForm;
+
     Validation.RequireField("emailaddress", "Emailadresse muß eingegeben werden");
     Validation.Add("emailaddress",
             Validator.Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$",
             "Ungültiges Format für die Emailadresse"));
 
+    bool mailSentOk = false;
+    string email = Request.Form["emailaddress"];
 
     if (IsPost)
     {
         if (Validation.IsValid())
         {
-            string email = Request.Form["emailaddress"];
             string guid = Guid.NewGuid().ToString();
 
             var ctx = DbFactory.CreateContext(this.Server);
             ctx.RegisterEmailChallenge(email, guid, DateTime.UtcNow);
 
-            bool mailSentOK = MyHaflinger.MailManager.SendStep1Mail($"http://myhaflinger.com/Anmeldung/Formular?token={guid}", email);
-
             var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
             logger.Trace("Email {0} registered for challenge", email);
 
-            // TODO: write feedback info to user
+            string host = HttpContext.Current.Request.Url.Host;
+            mailSentOk = MyHaflinger.MailManager.SendStep1Mail($"http://{host}/Anmeldung/Formular?token={guid}", email);
+
+            nextFormAction = FormActionEnum.ShowCompletionInfo;
         }
     }
-}
 
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" class="form-inline">
-            @Html.ValidationSummary()
-            <div class="form-group">
-                <label for="emailaddress">Emailadresse: </label>
-                <input type="email" class="form-control" id="emailaddress" placeholder="adresse@beispiel.com"
-                       name="emailaddress"
-                       value="@Request["emailaddress"]" />
-                @Html.ValidationMessage("emailaddress")
+    if (nextFormAction == FormActionEnum.ShowForm)
+    {
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Anmeldung: Schritt 1</h1>
+                <p>
+                    Als ersten Schritt validieren wir Deine Emailadresse - damit auch sicher alle spätere Kommunikation bei Dir ankommt (Zahlungsinformationen, last-minute Updates zu
+                    den Ausfahrten, usw). Nach Eingabe der Emailadresse schicken wir Dir eine Email die einen Link enthält mit dem Du die Anmeldung komplettieren kannst.
+                </p>
             </div>
-            <button type="submit" class="btn btn-default">Abschicken</button>
-        </form>
-    </div>
-</div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" class="form-inline">
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <label for="emailaddress">Emailadresse: </label>
+                        <input type="email" class="form-control" id="emailaddress" placeholder="adresse@beispiel.com"
+                               name="emailaddress"
+                               value="@email" />
+                        @*@Html.ValidationMessage("emailaddress")*@
+                    </div>
+                    <button type="submit" class="btn btn-default">Abschicken</button>
+                </form>
+            </div>
+        </div>
+
+    }
+    else if (nextFormAction == FormActionEnum.ShowCompletionInfo)
+    {
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Schritt 1: Ergebnis</h1>
+                @if (mailSentOk)
+                {
+                    <p>Eine Email mit dem Link zur Fortsetzung des Registrierungsvorgangs ist am Weg zu @email.</p>
+                }
+                else
+                {
+                    <p>Mail an @email konnte nicht gesendet werden.</p>
+                }
+            </div>
+        </div>
+    }
+}

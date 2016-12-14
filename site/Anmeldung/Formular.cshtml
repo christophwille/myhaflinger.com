@@ -76,8 +76,13 @@
             };
             reg = ctx.RegisterParticipant(reg);
 
+            var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
+            logger.Trace("Teilnehmer {0} was registered properly", reg.Name);
+
             // TODO: Mark token as used
-            // TODO: Send email to registrant
+
+            // Send email to registrant
+            MyHaflinger.MailManager.SendRegCompleteMailToParticipant(reg);
 
             // Send email to registration desk
             MyHaflinger.MailManager.SendNewRegInfoToRegDesk(AnmeldungSettings.RegDeskEmailAddress, reg);
@@ -88,116 +93,142 @@
 
     if (nextFormAction == FormActionEnum.ShowForm)
     {
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Anmeldeformular</h1>
+            </div>
+        </div>
 
-        <form class="form-horizontal" method="post">
-            <div class="form-group">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-10">
-                    @Html.ValidationSummary()
-                </div>
-            </div>
+        <div class="row">
+            <div class="col-md-10">
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Email</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static">@emailAddress</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputName" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Name" value="@inputName">
-                    @Html.ValidationMessage("inputName")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputStreet" class="col-sm-2 control-label">Strasse</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputStreet" name="inputStreet" placeholder="Strasse" value="@inputStreet">
-                    @Html.ValidationMessage("inputStreet")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputZip" class="col-sm-2 control-label">Postleitzahl</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputZip" name="inputZip" placeholder="Postleitzahl" value="@inputZip">
-                    @Html.ValidationMessage("inputZip")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputCity" class="col-sm-2 control-label">Stadt</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Stadt" value="@inputCity">
-                    @Html.ValidationMessage("inputCity")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputCountry" class="col-sm-2 control-label">Land</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCountry" name="inputCountry" placeholder="Land" value="@inputCountry">
-                    @Html.ValidationMessage("inputCountry")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputLicensePlate" class="col-sm-2 control-label">Kennzeichen</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputLicensePlate" name="inputLicensePlate" placeholder="Kennzeichen" value="@inputLicensePlate">
-                    @Html.ValidationMessage("inputLicensePlate")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPhone" class="col-sm-2 control-label">Telefon</label>
-                <div class="col-sm-10">
-                    <input type="tel" class="form-control" id="inputPhone" name="inputPhone" value="@inputPhone">
-                    @Html.ValidationMessage("inputPhone")
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@emailAddress</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Name" value="@inputName">
+                            @Html.ValidationMessage("inputName")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStreet" class="col-sm-2 control-label">Strasse</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputStreet" name="inputStreet" placeholder="Strasse" value="@inputStreet">
+                            @Html.ValidationMessage("inputStreet")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZip" class="col-sm-2 control-label">Postleitzahl</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputZip" name="inputZip" placeholder="Postleitzahl" value="@inputZip">
+                            @Html.ValidationMessage("inputZip")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCity" class="col-sm-2 control-label">Stadt</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Stadt" value="@inputCity">
+                            @Html.ValidationMessage("inputCity")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCountry" class="col-sm-2 control-label">Land</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCountry" name="inputCountry" placeholder="Land" value="@inputCountry">
+                            @Html.ValidationMessage("inputCountry")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLicensePlate" class="col-sm-2 control-label">Kennzeichen</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputLicensePlate" name="inputLicensePlate" placeholder="Kennzeichen" value="@inputLicensePlate">
+                            @Html.ValidationMessage("inputLicensePlate")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="col-sm-2 control-label">Telefon</label>
+                        <div class="col-sm-10">
+                            <input type="tel" class="form-control" id="inputPhone" name="inputPhone" value="@inputPhone">
+                            @Html.ValidationMessage("inputPhone")
+                        </div>
+                    </div>
 
-            <!-- Payment-relevant fields -->
-            <div class="form-group">
-                <label for="inputParticipantsFriday" class="col-sm-2 control-label">Teilnehmer am Freitag</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputParticipantsFriday" name="inputParticipantsFriday" value="@inputParticipantsFriday">
-                    @Html.ValidationMessage("inputParticipantsFriday")
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputParticipantsSatSun" class="col-sm-2 control-label">Teilnehmer Sa/So inkl Fahrer</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputParticipantsSatSun" name="inputParticipantsSatSun" value="@inputParticipantsSatSun">
-                    @Html.ValidationMessage("inputParticipantsSatSun")
-                </div>
-            </div>
+                    <!-- Payment-relevant fields -->
+                    <div class="form-group">
+                        <label for="inputParticipantsFriday" class="col-sm-2 control-label">Teilnehmer am Freitag</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="inputParticipantsFriday" name="inputParticipantsFriday" value="@inputParticipantsFriday">
+                            @Html.ValidationMessage("inputParticipantsFriday")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputParticipantsSatSun" class="col-sm-2 control-label">Teilnehmer Sa/So inkl Fahrer</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="inputParticipantsSatSun" name="inputParticipantsSatSun" value="@inputParticipantsSatSun">
+                            @Html.ValidationMessage("inputParticipantsSatSun")
+                        </div>
+                    </div>
 
-            <!-- Optional notes to the organizer -->
-            <div class="form-group">
-                <label for="inputNotes" class="col-sm-2 control-label">Bemerkungen</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" rows="3" id="inputNotes" name="inputNotes" value="@inputNotes"></textarea>
-                    @Html.ValidationMessage("inputNotes")
-                </div>
+                    <!-- Optional notes to the organizer -->
+                    <div class="form-group">
+                        <label for="inputNotes" class="col-sm-2 control-label">Bemerkungen</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" id="inputNotes" name="inputNotes" value="@inputNotes"></textarea>
+                            @Html.ValidationMessage("inputNotes")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Anmeldung abschicken</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </div>
 
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Anmeldung abschicken</button>
-                </div>
+        <div class="row">
+            <div class="col-md-10">
+                <h2>Preise / Details</h2>
+                <ul>
+                    <li>Bis auf die Felder Telefon und Bemerkungen sind alle Felder verpflichtend</li>
+                    <li>TODO</li>
+                </ul>
             </div>
-        </form>
-
+        </div>
     }
     else if (nextFormAction == FormActionEnum.ShowFormInitError)
     {
         <div class="row">
-            <div class="col-md-4">
-                Ungültiger Token für Schritt 2 der Anmeldung.
+            <div class="col-md-10">
+                <h1>Anmeldeformular</h1>
+                <p>Ungültiger Token für Schritt 2 der Anmeldung.</p>
             </div>
         </div>
-
     }
     else if (nextFormAction == FormActionEnum.ShowCompletionInfo)
     {
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Anmeldung ist erfolgt!</h1>
+                <p>TODO: repeat data like in email template</p>
 
+                <h2>Überweisung Teilnahmebeitrag</h2>
+                <p>TODO: kto info</p>
+            </div>
+        </div>
     }
 }

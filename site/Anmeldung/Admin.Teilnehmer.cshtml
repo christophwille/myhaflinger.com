@@ -3,6 +3,9 @@
     Page.Title = "Teilnehmerliste";
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
 }
+@section head {
+    <link href="~/Content/tablesorter-style.css" rel="stylesheet">
+}
 @{
     if (!User.Identity.IsAuthenticated)
     {
@@ -11,45 +14,45 @@
 
     var ctx = DbFactory.CreateContext(this.Server);
     var registrations = ctx.GetRegisteredParticipants();
+
+    // https://www.asp.net/web-pages/overview/data/5-working-with-data
 }
 
-<div>
-    Liste, editierbar je nach Rolle
-    Liste der RSVP Codes muß hier managebar sein
-    Wo legen wir die # der max Teilnehmer ab?
-</div>
+<div class="row">
+    <div class="col-md-10">
 
-<div>
-
-    <table id="myTable" class="tablesorter">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Stadt</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var r in registrations)
-            {
+        <table id="myTable" class="tablesorter">
+            <thead>
                 <tr>
-                    <td>@r.Id</td>
-                    <td>@r.Name</td>
-                    <td>@r.EmailAddress</td>
-                    <td>@r.City</td>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Stadt</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var r in registrations)
+            {
+                    <tr>
+                        <td>@r.Id</td>
+                        <td>@r.Name</td>
+                        <td>@r.EmailAddress</td>
+                        <td>@r.City</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
+    </div>
 </div>
 
 @section scripts{
-<script>
-    $(document).ready(function () {
-        $("#myTable").tablesorter({ sortList: [[0, 0], [1, 0]] });
-    }
-    );
-</script>
+    <script src="@Href("~/Scripts/tablesorter/jquery.tablesorter.combined.min.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myTable").tablesorter({ sortList: [[0, 0], [1, 0]] });
+        }
+        );
+    </script>
 }

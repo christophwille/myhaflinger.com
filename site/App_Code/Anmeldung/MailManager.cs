@@ -19,6 +19,15 @@ namespace MyHaflinger
             return emailSvc.SendMail("Emailadresse validiert, Haflingertreffen Salzkammergut", msgToSend, true, to);
         }
 
+        public static bool SendRegCompleteMailToParticipant(Registration reg)
+        {
+            string templateHtml = ReadHtmlTemplate("Anmeldung_FinalStep.html");
+            var msgToSend = Engine.Razor.RunCompile(templateHtml, "anmeldungFinalStepTemplateKey", null, reg);
+
+            var emailSvc = new SmtpMailService(new ConfigurationService());
+            return emailSvc.SendMail("Anmeldebestätigung", msgToSend, true, reg.EmailAddress);
+        }
+
         public static bool SendNewRegInfoToRegDesk(string to, Registration reg)
         {
             string templateHtml = ReadHtmlTemplate("Anmeldung_New_2RegDesk.html");
