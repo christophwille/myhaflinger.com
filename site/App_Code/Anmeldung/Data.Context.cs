@@ -56,5 +56,16 @@ namespace MyHaflinger.Anmeldung.Data
         {
             return this.Table<Registration>().OrderByDescending(r => r.Id).ToList();
         }
+
+        public Registration GetRegisteredParticipant(int id)
+        {
+            var reg = Table<Registration>().Where(c => c.Id == id).FirstOrDefault();
+            return reg;
+        }
+
+        public int UpdateRegisteredParticipant(Registration reg)
+        {
+            return this.Update(reg);
+        }
     }
 }

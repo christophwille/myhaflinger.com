@@ -1,4 +1,5 @@
 ﻿@using MyHaflinger.Anmeldung.Data
+@using MyHaflinger.Anmeldung
 @{
     Page.Title = "Teilnehmerliste";
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
@@ -24,20 +25,37 @@
         <table id="myTable" class="tablesorter">
             <thead>
                 <tr>
+                    <th>&nbsp;</th>
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>PLZ</th>
                     <th>Stadt</th>
+                    <th>Land</th>
+                    <th>Kennzeichen</th>
+                    <th>Tel</th>
+                    <th>Bezahlt?</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var r in registrations)
             {
                     <tr>
+                        <td>@{
+                            if (User.IsKassier())
+                            {
+                                <a href="@Href("Admin.TeilnehmerZahlungsdaten.cshtml?id=" + r.Id)">Zahlung</a>
+                            }
+                        }</td>
                         <td>@r.Id</td>
                         <td>@r.Name</td>
                         <td>@r.EmailAddress</td>
+                        <td>@r.Zip</td>
                         <td>@r.City</td>
+                        <td>@r.Country</td>
+                        <td>@r.NumberPlate</td>
+                        <td>@r.Phone</td>
+                        <td>@r.IntPaymentReceived</td>
                     </tr>
                 }
             </tbody>

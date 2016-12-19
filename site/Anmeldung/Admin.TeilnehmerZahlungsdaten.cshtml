@@ -1,0 +1,89 @@
+﻿@using MyHaflinger.Anmeldung.Data
+@using MyHaflinger.Anmeldung
+@{
+    Page.Title = "Teilnehmerliste";
+    Layout = "~/Shared/_Layout.Anmeldung.cshtml";
+}
+@{
+    if (!User.Identity.IsAuthenticated || !User.IsKassier())
+    {
+        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
+    }
+
+    string tlnrId = Request.QueryString["id"];
+
+    var ctx = DbFactory.CreateContext(this.Server);
+    var reg = ctx.GetRegisteredParticipant(Convert.ToInt32(tlnrId));
+
+    // Payment received - Render from db first
+    string paymentChecked = "";
+    if (reg.IntPaymentReceived) { paymentChecked = @"checked=""checked"""; }
+
+    string inputPaymReceived = Request.Form["inputPaymReceived"];
+    string inputNotes = Request.Form["inputNotes"];
+
+    // Payment received - ReRender with form info
+    bool bPaymentReceived = false;
+    if (IsPost)
+    {
+        if ("on" == inputPaymReceived)
+        {
+            bPaymentReceived = true;
+            paymentChecked = @"checked=""checked""";
+        }
+        else
+        {
+            paymentChecked = "";
+        }
+    }
+
+    if (IsPost && Validation.IsValid())
+    {
+        reg.IntPaymentReceived = bPaymentReceived;
+
+        string modMessage = String.Format("{0} um {1}: Zahlungsinfos verändert\r\n", User.Identity.Name, DateTime.UtcNow);
+        reg.IntNotes = modMessage + reg.IntNotes;
+
+        if (!String.IsNullOrWhiteSpace(inputNotes))
+        {
+            string prepend = String.Format("{0} {1} Notiz: {2}\r\n", User.Identity.Name, DateTime.UtcNow.ToString(), inputNotes);
+            reg.IntNotes = prepend + reg.IntNotes;
+        }
+
+        ctx.UpdateRegisteredParticipant(reg);
+        Response.Redirect("Admin.Teilnehmer.cshtml");
+    }
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Zahlungsinfos für @reg.Name</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                <label for="inputPaymReceived" class="col-sm-2 control-label">Zahlung erhalten</label>
+                <div class="col-sm-10">
+                    <input type="checkbox" class="form-control" id="inputPaymReceived" name="inputPaymReceived" placeholder="Name" @paymentChecked>
+                    @Html.ValidationMessage("inputPaymReceived")
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputNotes" class="col-sm-2 control-label">Interne Bemerkungen</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" id="inputNotes" name="inputNotes" value="@inputNotes"></textarea>
+                    @Html.ValidationMessage("inputNotes")
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Speichern</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -5,9 +5,26 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using System.Security.Principal;
 
 namespace MyHaflinger.Anmeldung
 {
+    public static class AnmeldungRoles
+    {
+        private static string Kassier = "kassier";
+        private static string Veranstaltungswart = "wart";
+
+        public static bool IsKassier(this IPrincipal p)
+        {
+            return p.IsInRole(Kassier);
+        }
+
+        public static bool IsVeranstaltungswart(this IPrincipal p)
+        {
+            return p.IsInRole(Veranstaltungswart);
+        }
+    }
+
     public static class AuthenticationFactory
     {
         public static ClaimsIdentity CreateIdentity(string username, string role)
