@@ -1,0 +1,35 @@
+﻿@using ClosedXML.Excel
+@using MyHaflinger.Anmeldung.Data
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
+    }
+
+    string fileName = "Teilnehmer.xlsx";
+
+    Response.Clear();
+    Response.ClearHeaders();
+    Response.ClearContent();
+    Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+    var ctx = DbFactory.CreateContext(this.Server);
+    var registrations = ctx.GetRegisteredParticipants();
+
+    using (XLWorkbook wb = new XLWorkbook(XLEventTracking.Disabled))
+    {
+        var ws = wb.Worksheets.Add("Teilnehmer");
+
+        // TODO: Add header columns, maybe do a .Select to remove internal mgmt columns
+        ws.Cell(1, 1).Value = registrations.AsEnumerable(); // https://github.com/closedxml/closedxml/wiki/Copying-IEnumerable-Collections
+
+        using (MemoryStream mStream = new MemoryStream())
+        {
+            wb.SaveAs(mStream);
+            mStream.WriteTo(Response.OutputStream);
+            Response.Flush();
+            Response.End();
+        }
+    }
+}
