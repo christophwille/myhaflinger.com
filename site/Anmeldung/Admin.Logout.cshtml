@@ -1,0 +1,7 @@
+﻿@using Microsoft.Owin.Security
+@using Microsoft.AspNet.Identity
+@{
+    var authenticationManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
+    authenticationManager.SignOut();
+    Response.Redirect("./");
+}

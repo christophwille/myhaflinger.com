@@ -1,3 +1,5 @@
 In an ASP.NET Web Pages project, the x86 and x64 folder are *not* copied automatically on build
 
 Also, in web.config a target platform needs to be specified in <compiler>, plus manually copy the respective native dll to /bin root
+
+Deployment note: if using x86 compilation, set the app pool to 32 bit
