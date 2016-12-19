@@ -1,0 +1,39 @@
+﻿@using MyHaflinger.Anmeldung.Data
+@{
+    Page.Title = "Teilnehmerdetails";
+    Layout = "~/Shared/_Layout.Anmeldung.cshtml";
+}
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
+    }
+
+    string tlnrId = Request.QueryString["id"];
+
+    var ctx = DbFactory.CreateContext(this.Server);
+    var reg = ctx.GetRegisteredParticipant(Convert.ToInt32(tlnrId));
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Teilnehmerdetails</h1>
+        <p>Name: @reg.Name</p>
+        <p>Emailadress: @reg.EmailAddress</p>
+        <p>Registrierungsdatum: @reg.RegisteredAt</p>
+        <p>Strasse: @reg.Street</p>
+        <p>Postleitzahl: @reg.Zip</p>
+        <p>Ort: @reg.City</p>
+        <p>Land: @reg.Country</p>
+        <p>Kennzeichen: @reg.NumberPlate</p>
+        <p>Telefon: @reg.Phone</p>
+        <p># Tlnr Freitag: @reg.PParticipantsFriday</p>
+        <p># Tlnr Samstag: @reg.PParticipantsSatSun (inkl Fahrer)</p>
+        <p>Berechneter Preis: @reg.TotalPrice</p>
+        <p>Intern: Bezahlt? @reg.IntPaymentReceived</p>
+        <p>Freitext von Tlnr: @reg.Notes</p>
+        <hr />
+        <p>Interne Infos</p>
+        <pre>@reg.IntNotes</pre>
+    </div>
+</div>
