@@ -1,4 +1,5 @@
 ﻿@using MyHaflinger.Anmeldung.Data
+@using Newtonsoft.Json
 @{
     Page.Title = "Treffenanmeldung";
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
@@ -78,13 +79,17 @@
             };
             reg = ctx.RegisterParticipant(reg);
 
+            string reg4Logging = JsonConvert.SerializeObject(reg, Formatting.None);
             var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
             logger.Trace("Teilnehmer {0} was registered properly", reg.Name);
+            logger.Trace("Teilnehmer {0} data: {1}", reg.Name, reg4Logging);
 
             // TODO: Mark token as used
 
             // Send email to registrant
             MyHaflinger.MailManager.SendRegCompleteMailToParticipant(reg);
+
+            // TODO: Handle mail sending erros
 
             // Send email to registration desk
             MyHaflinger.MailManager.SendNewRegInfoToRegDesk(AnmeldungSettings.RegDeskEmailAddress, reg);
