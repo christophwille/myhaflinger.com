@@ -29,6 +29,9 @@
         Validator.Integer(),
         Validator.Range(0, 10, "Wert muß größer/gleich 0 sein (und kleiner 10)")
     );
+    Validation.Add("inputTeilnahmebedingungen",
+        Validator.Required("Teilnahmebedingungen müssen akzeptiert werden")
+    );
 
     // Read post-data once, usage of Request.Form below this block is not intended
     string inputName = Request.Form["inputName"];
@@ -41,7 +44,6 @@
     string inputNotes = Request.Form["inputNotes"];
     string inputParticipantsFriday = Request.Form["inputParticipantsFriday"];
     string inputParticipantsSatSun = Request.Form["inputParticipantsSatSun"];
-
 
     var ctx = DbFactory.CreateContext(this.Server);
 
@@ -190,6 +192,25 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="inputTeilnahmebedingungen" class="col-sm-2 control-label">Teilnahmebedingungen akzeptieren</label>
+                        <div class="col-sm-1">
+                            <input type="checkbox" class="form-control" id="inputTeilnahmebedingungen" name="inputTeilnahmebedingungen" />
+                        </div>
+                        <div class="col-sm-9">
+                            <p>
+                                Diese Veranstaltung ist ein genehmigungsfreies Treffen gleichgesinnter Fahrer, Beifahrer und Freunde von Fahrzeugen der 
+                                Marke Steyr Puch Haflinger.
+                            </p>
+                            <p>
+                                Die StVO ist w&auml;hrend der gesamten Veranstaltung einzuhalten, die Fahrer sind für die ordnungsgem&auml;&szlig;e Zulassung sowie Versicherung 
+                                eigenverantwortlich, und m&uuml;ssen im Besitz der beh&ouml;rdlichen Dokumente sein.
+                            </p>
+                            <p>
+                                Der Veranstalter lehnt jede Haftung f&uuml;r Personen und Sachsch&auml;den, auch gegen Dritte ab, insbesondere beim freien Gel&auml;ndefahren.
+                            </p>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
