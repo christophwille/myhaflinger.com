@@ -21,22 +21,20 @@
 
 <div class="row">
     <div class="col-md-10">
-        <h1>Teilnehmerliste</h1>
+        <h1>Teilnehmerliste - @registrations.Count</h1>
 
         <table id="myTable" class="tablesorter">
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Id</th>
+                    <th>Reg-Datum</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Stra&szlig;e</th>
-                    <th>PLZ</th>
-                    <th>Stadt</th>
                     <th>Land</th>
-                    <th>Kennzeichen</th>
-                    <th>Tel</th>
-                    <th>Bezahlt?</th>
+                    <th>Zu zahlen</th>
+                    <th>Gezahlt</th>
+                    <th>Z-Datum</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,15 +50,13 @@
                             <a href="@Href("Admin.TeilnehmerDetails.cshtml?id=" + r.Id)">Details</a>
                         }</td>
                         <td>@r.Id</td>
+                        <td>@r.RegisteredAt</td>
                         <td>@r.Name</td>
                         <td>@r.EmailAddress</td>
-                        <td>@r.Street</td>
-                        <td>@r.Zip</td>
-                        <td>@r.City</td>
                         <td>@r.Country</td>
-                        <td>@r.NumberPlate</td>
-                        <td>@r.Phone</td>
-                        <td>@r.IntPaymentReceived</td>
+                        <td>@r.TotalPrice</td>
+                        <td>@r.IntPaymentReceivedAmount</td>
+                        <td>@r.IntPaymentReceivedDate</td>
                     </tr>
                 }
             </tbody>

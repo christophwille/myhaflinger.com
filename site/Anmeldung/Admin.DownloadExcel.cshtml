@@ -21,6 +21,7 @@
     var regTrimmed = registrations.Select(r => new
     {
         r.Id,
+        r.RegisteredAt,
         r.Name,
         r.EmailAddress,
         r.Street,
@@ -31,9 +32,9 @@
         r.NumberPlate,
         r.PParticipantsFriday,
         r.PParticipantsSatSun,
-        r.IntPaymentReceived,
         r.TotalPrice,
-        r.RegisteredAt
+        r.IntPaymentReceivedAmount,
+        r.IntPaymentReceivedDate,
     }).OrderBy(r => r.Id);
 
     using (XLWorkbook wb = new XLWorkbook(XLEventTracking.Disabled))
@@ -41,21 +42,22 @@
         var ws = wb.Worksheets.Add("Teilnehmer");
 
         ws.Cell(1, 1).Value = "Id";
-        ws.Cell(1, 2).Value = "Name";
-        ws.Cell(1, 3).Value = "Email";
-        ws.Cell(1, 4).Value = "Strasse";
-        ws.Cell(1, 5).Value = "PLZ";
-        ws.Cell(1, 6).Value = "Ort";
-        ws.Cell(1, 7).Value = "Land";
-        ws.Cell(1, 8).Value = "Tel";
-        ws.Cell(1, 9).Value = "Kennzeichen";
-        ws.Cell(1, 10).Value = "FR";
-        ws.Cell(1, 11).Value = "SA/SO";
-        ws.Cell(1, 12).Value = "Bezahlt?";
-        ws.Cell(1, 13).Value = "Summe";
-        ws.Cell(1, 14).Value = "Reg Datum";
+        ws.Cell(1, 2).Value = "Reg Datum";
+        ws.Cell(1, 3).Value = "Name";
+        ws.Cell(1, 4).Value = "Email";
+        ws.Cell(1, 5).Value = "Strasse";
+        ws.Cell(1, 6).Value = "PLZ";
+        ws.Cell(1, 7).Value = "Ort";
+        ws.Cell(1, 8).Value = "Land";
+        ws.Cell(1, 9).Value = "Tel";
+        ws.Cell(1, 10).Value = "Kennzeichen";
+        ws.Cell(1, 11).Value = "FR";
+        ws.Cell(1, 12).Value = "SA/SO";
+        ws.Cell(1, 13).Value = "Zu zahlen";
+        ws.Cell(1, 14).Value = "Bezahlt";
+        ws.Cell(1, 15).Value = "Z-Datum";
 
-        ws.Range(1,1,1,14).AddToNamed("Titles");
+        ws.Range(1,1,1,15).AddToNamed("Titles");
 
         ws.Cell(2, 1).Value = regTrimmed;
 

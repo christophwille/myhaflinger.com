@@ -42,12 +42,19 @@ namespace MyHaflinger.Anmeldung.Data
         // Statistics data
         public int StatParticipantsSunday { get; set; }
 
-        // Internal data
-        public bool IntPaymentReceived { get; set; }
-        public string IntNotes { get; set; }
+        // Internal: Payment data
+        public double IntPaymentReceivedAmount { get; set; }
+        public string IntPaymentReceivedDate { get; set; }  // Intentionally string
+        public string IntPaymentNotes { get; set; }
+
+        // Internal: Modification log
+        public string IntModificationLog { get; set; }
 
         // Computed, non-persisted properties
         [Ignore]
         public int TotalPrice {  get { return this.GetTotalPrice(); } }
+
+        [Ignore]
+        public bool HasRegistrationNotes { get { return !String.IsNullOrWhiteSpace(Notes); } }
     }
 }

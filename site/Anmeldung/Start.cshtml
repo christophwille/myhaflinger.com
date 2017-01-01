@@ -51,7 +51,7 @@
                     @Html.ValidationSummary()
                     <div class="form-group">
                         <label for="emailaddress">Emailadresse: </label>
-                        <input type="email" class="form-control" id="emailaddress" placeholder="adresse@beispiel.com"
+                        <input type="email" class="form-control" id="emailaddress" placeholder="ich@beispiel.com"
                                name="emailaddress"
                                value="@email" />
                         @*@Html.ValidationMessage("emailaddress")*@
@@ -69,11 +69,15 @@
                 <h1>Schritt 1: Ergebnis</h1>
                 @if (mailSentOk)
                 {
-                    <p>Eine Email mit dem Link zur Fortsetzung des Registrierungsvorgangs ist am Weg zu @email.</p>
+                    <p>
+                        Eine Email mit dem Link zur Fortsetzung des Registrierungsvorgangs ist bereits am Weg zu @email und
+                        sollte innerhalb von wenigen Minuten (meist &lt; eine Minute) eingehen. Bitte gegebenenfalls den 
+                        Spam Ordner kontrollieren!
+                    </p>
                 }
                 else
                 {
-                    <p>Mail an @email konnte nicht gesendet werden.</p>
+                    <p>Mail an @email konnte nicht gesendet werden. Vertippt?</p>
                 }
             </div>
         </div>
