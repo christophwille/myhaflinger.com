@@ -1,0 +1,81 @@
+﻿@using MyHaflinger.Anmeldung.Data
+@using MyHaflinger.Anmeldung
+@{
+    Page.Title = "Anzahl Personen pro Tag ändern";
+    Layout = "~/Shared/_Layout.Anmeldung.cshtml";
+}
+@{
+    if (!User.Identity.IsAuthenticated || !User.IsKassier())
+    {
+        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
+    }
+
+    Validation.Add("inputParticipantsFriday",
+        Validator.Required("Teilnehmer Freitag muß eingegeben werden"),
+        Validator.Integer(),
+        Validator.Range(0, 10, "Wert muß größer/gleich 0 sein (und kleiner 10)")
+    );
+    Validation.Add("inputParticipantsSatSun",
+        Validator.Required("Teilnehmer Sa/So muß eingegeben werden"),
+        Validator.Integer(),
+        Validator.Range(0, 10, "Wert muß größer/gleich 0 sein (und kleiner 10)")
+    );
+
+    string tlnrId = Request.QueryString["id"];
+    var ctx = DbFactory.CreateContext(this.Server);
+    var reg = ctx.GetRegisteredParticipant(Convert.ToInt32(tlnrId));
+
+    string inputParticipantsFriday = Request.Form["inputParticipantsFriday"];
+    string inputParticipantsSatSun = Request.Form["inputParticipantsSatSun"];
+
+    if (!IsPost)
+    {
+        inputParticipantsFriday = reg.PParticipantsFriday.ToString();
+        inputParticipantsSatSun = reg.PParticipantsSatSun.ToString();
+    }
+
+    if (IsPost && Validation.IsValid())
+    {
+        reg.PParticipantsFriday = Convert.ToInt32(inputParticipantsFriday);
+        reg.PParticipantsSatSun = Convert.ToInt32(inputParticipantsSatSun);
+
+        string modMessage = $"{User.Identity.Name} hat um {DateTime.UtcNow} Anzahl Personen Fr/Sa/So verändert\r\n";
+        reg.IntModificationLog = modMessage + reg.IntModificationLog;
+
+        ctx.UpdateRegisteredParticipant(reg);
+        Response.Redirect("Admin.Teilnehmer.cshtml");
+    }
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Anzahl Personen für @reg.Name (EUR bisher: @reg.TotalPrice)</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                <label for="inputParticipantsFriday" class="col-sm-2 control-label">Teilnehmer am Freitag</label>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" id="inputParticipantsFriday" name="inputParticipantsFriday" value="@inputParticipantsFriday">
+                    @Html.ValidationMessage("inputParticipantsFriday")
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputParticipantsSatSun" class="col-sm-2 control-label">Teilnehmer Sa/So inkl Fahrer</label>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" id="inputParticipantsSatSun" name="inputParticipantsSatSun" value="@inputParticipantsSatSun">
+                    @Html.ValidationMessage("inputParticipantsSatSun")
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Speichern</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
