@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc
+@using MyHaflinger.Anmeldung
 @{
     Layout = "~/Shared/_Layout.cshtml";
     Page.Title = "Haflingertreffen 2017";
@@ -39,20 +40,168 @@
             <div class="col-sm-9">
                 <h2>9. Internationales Salzkammergut Haflingertreffen</h2>
                 <p>
-                    Anmeldung und Programm werden 2017 zur Verfügung stehen.
+                    <strong>Treffpunkte</strong><br/>
+                    Freitag: Kurpark Bad Ischl<br/>
+                    Samstag+Sonntag: Museum für Fahrzeug und Technik, Sulzbach, 4820 Bad Ischl
                 </p>
             </div>
             <div class="col-sm-3 text-right">
                 23. Juni 2017 - 25. Juni 2017
+                <a class="btn btn-primary btn-lg" href="/Anmeldung/Start">Anmelden!</a>
             </div>
         </div>
     </div>
 </section><!--/#cta-->
 
+<section id="meet-team">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title text-center wow fadeInDown">Programm</h2>
+            <p class="text-center wow fadeInDown">
+                Im Rahmen des Treffens findet am Samstag ein Teilemarkt statt. <br/>Anbieter mögen sich mit dem Veranstalter zwecks Platzreservierung in Verbindung setzen.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 class="column-title">Freitag 23. Juni</h3>
+                <div class="tab-pane fade active in">
+                    <div>
+                        <em>Ab 13 Uhr</em>
+                    </div>
+                    <div>
+                        todo.
+                    </div>
+                    <div>
+                        <em>Ab 14 Uhr</em>
+                    </div>
+                    <div>
+                        todo.
+                    </div>
+                    <div>
+                        <em>18:00</em>
+                    </div>
+                    <div>
+                        todo
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="column-title">Samstag 24. Juni</h3>
+                <div class="tab-pane fade active in">
+                    <div>
+                        <em>Ab 7 Uhr</em>
+                    </div>
+                    <div>
+                        Beginn der Veranstaltung mit Teilemarkt am Areal des Museums für Fahrzeug-Technik-Luftfahrt in 
+                        Bad Ischl. Ausgabe der Teilnehmerunterlagen.
+                    </div>
+                    <div>
+                        <em>8:30</em>
+                    </div>
+                    <div>
+                        Begrüßung.
+                    </div>
+                    <div>
+                        <em>9 Uhr</em>
+                    </div>
+                    <div>
+                        Start zur ganztägigen Rundfahrt durch das Salzkammergut mit Mittagsrast inkl. Verpflegung.
+                    </div>
+                    <div>
+                        <em>18:00</em>
+                    </div>
+                    <div>
+                        Abendveranstaltung im Zentrum von Bad Goisern mit gemeinsamen Abendessen.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="column-title">Sonntag 25. Juni</h3>
+                <div class="tab-pane fade active in">
+                    <div>
+                        <em>Ab 9 Uhr</em>
+                    </div>
+                    <div>
+                        Freies Geländefahren mit gemütlichem Ausklang.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#meet-team-->
+
+<section id="features">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title text-center wow fadeInDown">Nenngeld</h2>
+            <p class="text-center wow fadeInDown">
+                Anmeldeschluß ist der Freitag 9. Juni. Die Anmeldung gilt als fix, wenn bis zu diesem Zeitpunkt die Teilnahmegebühr auf unserem Konto eingelangt ist.<br/>
+                Anmeldungen am Veranstaltungstag können leider nicht mehr berücksichtigt werden.<br/>
+                Campingmöglichkeit besteht direkt beim Museum, ebenso Waschmöglichkeit. Bitte um Voranmeldung beim Veranstalter.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 wow fadeInLeft">
+                <img class="img-responsive" src="main-nenngeld.jpg" alt="">
+            </div>
+            <div class="col-sm-6">
+                <div class="media service-box wow fadeInRight">
+                    <div class="pull-left">
+                        <i class="fa fa-cutlery"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Teilnahme Freitag</h4>
+                        <p>
+                            @AnmeldungSettings.PricePerParticipantFriday EUR pro Person.
+                            Beinhaltet Catering (exklusive Getränke)
+                        </p>
+                    </div>
+                </div>
+                <div class="media service-box wow fadeInRight">
+                    <div class="pull-left">
+                        <i class="fa fa-car"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Fahrer + Fahrzeug Sa+So</h4>
+                        <p>
+                            @AnmeldungSettings.PricePerCar EUR<br />
+                            Beinhaltet Teilnahme an der Veranstaltung inklusiver aller Benutzungsgebühren,
+                            Mittagsrast und Teilnahme an der Abendveranstaltung mit Verpflegung (exklusive Getränke), sowie
+                            Überraschungspräsent pro Fahrzeug
+                        </p>
+                    </div>
+                </div>
+                <div class="media service-box wow fadeInRight">
+                    <div class="pull-left">
+                        <i class="fa fa-male"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Beifahrer Sa+So</h4>
+                        @AnmeldungSettings.PricePerPassenger EUR<br />
+                        <p>
+                            Beinhaltet Teilnahme an der Veranstaltung inklusiver aller Benutzungsgebühren,
+                            Mittagsrast und Teilnahme an der Abendveranstaltung mit Verpflegung (exklusive Getränke)
+                        </p>
+                    </div>
+                </div>
+                <div class="media service-box wow fadeInRight">
+                    <div class="pull-left">
+                        <i class="fa fa-child"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Kinder</h4>
+                        <p>Für Kinder bis 15 Jahre ist die Teilnahme an allen 3 Tagen nenngeldfrei.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="portfolio">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Eine Vorschau</h2>
+            <h2 class="section-title text-center wow fadeInDown">Eine Vorschau in Bildern</h2>
             @*<p class="text-center wow fadeInDown">Eine kleine Fotoauswahl von einer Probefahrt</p>*@
         </div>
         @*<div class="text-center">
