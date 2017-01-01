@@ -29,6 +29,7 @@
                     <th>&nbsp;</th>
                     <th>Id</th>
                     <th>Reg-Datum</th>
+                    <th>Notiz</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Land</th>
@@ -51,6 +52,14 @@
                         }</td>
                         <td>@r.Id</td>
                         <td>@r.RegisteredAt</td>
+                        <td>
+                            @{
+                                if (r.HasRegistrationNotes)
+                                {
+                                    <a href="#" data-toggle="tooltip" title="@r.Notes">X</a>
+                                }
+                            }
+                        </td>
                         <td>@r.Name</td>
                         <td>@r.EmailAddress</td>
                         <td>@r.Country</td>
