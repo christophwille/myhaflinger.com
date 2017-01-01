@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-public static class AnmeldungSettings
+﻿namespace MyHaflinger.Anmeldung
 {
-    // Friday
-    public static readonly int PricePerParticipantFriday = 25;
+    public static class AnmeldungSettings
+    {
+        // Friday
+        public static readonly int PricePerParticipantFriday = 25;
 
-    // Main event
-    public static readonly int PricePerCar = 85;
-    public static readonly int PricePerPassenger = 60;
+        // Main event
+        public static readonly int PricePerCar = 95;
+        public static readonly int PricePerPassenger = 70;
 
-    public static readonly string RegDeskEmailAddress = "christophw@alphasierrapapa.com";
+        public static readonly string RegDeskEmailAddress = "christophw@alphasierrapapa.com";
+    }
 }
