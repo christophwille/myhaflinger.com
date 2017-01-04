@@ -56,5 +56,7 @@ namespace MyHaflinger.Anmeldung.Data
 
         [Ignore]
         public bool HasRegistrationNotes { get { return !String.IsNullOrWhiteSpace(Notes); } }
+        [Ignore]
+        public bool HasIntPaymentNotes { get { return !String.IsNullOrWhiteSpace(IntPaymentNotes); } }
     }
 }

@@ -33,8 +33,11 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Land</th>
+                    <th>FR</th>
+                    <th>SA/SO</th>
                     <th>Zu zahlen</th>
                     <th>Gezahlt</th>
+                    <th>N</th>
                     <th>Z-Datum</th>
                 </tr>
             </thead>
@@ -63,8 +66,18 @@
                         <td>@r.Name</td>
                         <td>@r.EmailAddress</td>
                         <td>@r.Country</td>
+                        <td>@r.PParticipantsFriday</td>
+                        <td>@r.PParticipantsSatSun</td>
                         <td>@r.TotalPrice</td>
                         <td>@r.IntPaymentReceivedAmount</td>
+                        <td>
+                            @{
+                                if (r.HasIntPaymentNotes)
+                                {
+                                    <a href="#" data-toggle="tooltip" title="@r.IntPaymentNotes">X</a>
+                                }
+                            }
+                        </td>
                         <td>@r.IntPaymentReceivedDate</td>
                     </tr>
                 }
