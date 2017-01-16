@@ -9,7 +9,17 @@ namespace MyHaflinger
 {
     public static partial class MailManager
     {
-        public static readonly string AnfrageTemplate = "Name: @Model.Name\r\nEmail: @Model.Email\r\nBetreff: @Model.Subject\r\nNachricht: \r\n@Model.Message\r\n";
+        public static readonly string AnfrageTemplate = @"<!DOCTYPE html>
+                    <html>
+                    <body>
+                        <h1>Anfrage myhaflinger.com</h1>
+                        <p>Name: @Model.Name</p>
+                        <p>Email: @Model.Email</p>
+                        <p>Betreff: @Model.Subject</p>
+                        <p>Nachricht:</p>
+                        <p>@Model.Message</p>
+                    </body>
+                    </html>";
 
         public static void SendAnfrageFormularMail(MailJson mm)
         {
