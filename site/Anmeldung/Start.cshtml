@@ -24,7 +24,7 @@
             ctx.RegisterEmailChallenge(email, guid, DateTime.UtcNow);
 
             var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
-            logger.Trace("Email {0} registered for challenge", email);
+            logger.Trace("REG:S:CH: Email {0} registered for challenge", email);
 
             string host = HttpContext.Current.Request.Url.Host;
             mailSentOk = MyHaflinger.MailManager.SendStep1Mail($"http://{host}/Anmeldung/Formular?token={guid}", email);

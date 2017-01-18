@@ -91,8 +91,8 @@
 
             string reg4Logging = JsonConvert.SerializeObject(reg, Formatting.None);
             var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
-            logger.Trace("Teilnehmer {0} was registered properly", reg.Name);
-            logger.Trace("Teilnehmer {0} data: {1}", reg.Name, reg4Logging);
+            logger.Trace("REG:S:F: Teilnehmer {0} was registered properly", reg.Name);
+            logger.Trace("REG:S:F:D: Teilnehmer {0} data: {1}", reg.Name, reg4Logging);
 
             // TODO: Mark token as used
 

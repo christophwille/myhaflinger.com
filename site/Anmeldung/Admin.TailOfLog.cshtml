@@ -34,9 +34,17 @@
                 {
                     var lineElements = line.Split('|');
                     string classInfo = "";
-                    if (lineElements[3].StartsWith("SEC: Ung"))
+                    if (lineElements[3].StartsWith("SEC:F:"))
                     {
                         classInfo = "class=\"danger\"";
+                    }
+                    else if (lineElements[3].StartsWith("REG:S:F: "))
+                    {
+                        classInfo = "class=\"success\"";
+                    }
+                    else if (lineElements[3].StartsWith("REG:S:CH:"))
+                    {
+                        classInfo = "class=\"info\"";
                     }
                     <tr @Html.Raw(classInfo)>
                         <td>@lineElements[0]</td>

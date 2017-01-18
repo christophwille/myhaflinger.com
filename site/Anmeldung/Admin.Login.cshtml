@@ -30,13 +30,13 @@
                 authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
                 var identity = AuthenticationFactory.CreateIdentity(username, user.Role);
-                logger.Trace("SEC: User {0} logged in from {1}", username, ipAddress);
+                logger.Trace("SEC:S: User {0} logged in from {1}", username, ipAddress);
 
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
             }
             else
             {
-                logger.Trace("SEC: Invalid login atttempt for user {0} from {1}", username, ipAddress);
+                logger.Trace("SEC:F: Invalid login atttempt for user {0} from {1}", username, ipAddress);
             }
         }
     }
