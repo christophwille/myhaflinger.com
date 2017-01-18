@@ -7,6 +7,15 @@
     Page.Description = "9. Internationales Salzkammergut Haflingertreffen der Haflingerfreunde Salzkammergut in Bad Ischl und Umgebung. Anmeldung, Programm und weitere Vorabinformationen.";
 }
 
+@section head {
+    <style>
+        .right {
+            position: absolute;
+            right: 0px;
+        }
+    </style>
+}
+
 <header id="header">
     <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
         <div class="container">
@@ -24,9 +33,9 @@
                 <ul class="nav navbar-nav">
                     <li class="scroll active"><a href="#cta">Ank&uuml;ndigung</a></li>
                     @*<li class="scroll"><a href="#aboutus">&Uuml;ber uns</a></li>
-                    <li class="scroll"><a href="#events">Treffen</a></li>
-                    <li class="scroll"><a href="#videos">Videos</a></li>
-                    <li class="scroll"><a href="#contact">Kontakt</a></li>*@
+                        <li class="scroll"><a href="#events">Treffen</a></li>
+                        <li class="scroll"><a href="#videos">Videos</a></li>
+                        <li class="scroll"><a href="#contact">Kontakt</a></li>*@
                 </ul>
             </div>
         </div><!--/.container-->
@@ -41,16 +50,22 @@
                 <h2>9. Internationales Salzkammergut Haflingertreffen</h2>
                 <p>
                     <strong>Kontakt</strong><br />
-                    <a href="mailto:skgt.haflingertreffen2017@gmail.com">skgt.haflingertreffen2017@gmail.com</a><br/>
-                    Telefonisch bei Friedo Jäger, +43 664 60132215<br/>
-                    <strong>Treffpunkte</strong><br/>
-                    Freitag: Kurpark Bad Ischl (Navi: Kurhausstra&szlig;e 8, 4820 Bad Ischl)<br/>
+                    <a href="mailto:skgt.haflingertreffen2017@gmail.com">skgt.haflingertreffen2017@gmail.com</a><br />
+                    Telefonisch bei Friedo Jäger, +43 664 60132215<br />
+                    <strong>Treffpunkte</strong><br />
+                    Freitag: Kurpark Bad Ischl (Navi: Kurhausstra&szlig;e 8, 4820 Bad Ischl)<br />
                     Samstag+Sonntag: Museum für Fahrzeug und Technik (Navi: Sulzbach 178, 4820 Bad Ischl)<br />
                 </p>
             </div>
             <div class="col-sm-3 text-right">
-                23. Juni 2017 - 25. Juni 2017
-                <a class="btn btn-primary btn-lg" href="/Anmeldung/Start">Anmelden!</a>
+                23. Juni 2017 - 25. Juni 2017<br />
+                <a class="btn btn-primary btn-lg" href="/Anmeldung/Start">Anmelden!</a><br/>
+                <div class="media service-box right">
+                    <div class="pull-left" id="printThePage">
+                        <i class="fa fa-print" data-toggle="tooltip" title="Programm ausdrucken"></i><
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -61,7 +76,7 @@
         <div class="section-header">
             <h2 class="section-title text-center wow fadeInDown">Programm</h2>
             <p class="text-center wow fadeInDown">
-                Im Rahmen des Treffens findet am Samstag ein Teilemarkt statt. <br/>Anbieter mögen sich mit dem Veranstalter zwecks Platzreservierung in Verbindung setzen.
+                Im Rahmen des Treffens findet am Samstag ein Teilemarkt statt. <br />Anbieter mögen sich mit dem Veranstalter zwecks Platzreservierung in Verbindung setzen.
             </p>
         </div>
         <div class="row">
@@ -72,7 +87,7 @@
                         <em>Ab 13 Uhr</em>
                     </div>
                     <div>
-                        Ausgabe der Teilnehmerunterlagen auf der Terrasse des Kongresszentrums im Kurpark.<br/>
+                        Ausgabe der Teilnehmerunterlagen auf der Terrasse des Kongresszentrums im Kurpark.<br />
                         Ausfahrt in mehreren Gruppen zu einem der sch&ouml;nsten Aussichtspunkte auf Bad Ischl.
                     </div>
                     <div>
@@ -90,13 +105,13 @@
                         <em>Ab 7 Uhr</em>
                     </div>
                     <div>
-                        Beginn der Veranstaltung mit Teilemarkt am Areal des Museums für Fahrzeug-Technik-Luftfahrt in 
+                        Beginn der Veranstaltung mit Teilemarkt am Areal des Museums für Fahrzeug-Technik-Luftfahrt in
                         Bad Ischl. Ausgabe der Teilnehmerunterlagen.
                     </div>
                     <div>
                         <em>8:30</em>
-                    @*</div>
-                    <div>*@
+                        @*</div>
+                            <div>*@
                         Begrüßung.
                     </div>
                     <div>
@@ -136,8 +151,8 @@
         <div class="section-header">
             <h2 class="section-title text-center wow fadeInDown">Nenngeld</h2>
             <p class="text-center wow fadeInDown">
-                Anmeldeschluß ist der Freitag 9. Juni. Die Anmeldung gilt als fix, wenn bis zu diesem Zeitpunkt die Teilnahmegebühr auf unserem Konto eingelangt ist.<br/>
-                Anmeldungen am Veranstaltungstag können leider nicht mehr berücksichtigt werden.<br/>
+                Anmeldeschluß ist der Freitag 9. Juni. Die Anmeldung gilt als fix, wenn bis zu diesem Zeitpunkt die Teilnahmegebühr auf unserem Konto eingelangt ist.<br />
+                Anmeldungen am Veranstaltungstag können leider nicht mehr berücksichtigt werden.<br />
                 Campingmöglichkeit besteht direkt beim Museum, ebenso Waschmöglichkeit. Bitte um Voranmeldung beim Veranstalter.
             </p>
         </div>
@@ -167,7 +182,7 @@
                         <p>
                             @AnmeldungSettings.PricePerCar EUR<br />
                             Beinhaltet Teilnahme an der Veranstaltung inklusive aller Benutzungsgebühren,
-                            Mittagessen und Teilnahme an der Abendveranstaltung mit Verpflegung (exklusive Getränke), sowie
+                            1x Mittagessen, 1x Abendessen, jeweils excl. Getränke, sowie
                             Überraschungspräsent pro Fahrzeug
                         </p>
                     </div>
@@ -181,7 +196,7 @@
                         @AnmeldungSettings.PricePerPassenger EUR<br />
                         <p>
                             Beinhaltet Teilnahme an der Veranstaltung inklusive aller Benutzungsgebühren,
-                            Mittagessen und Teilnahme an der Abendveranstaltung mit Verpflegung (exklusive Getränke)
+                            1x Mittagessen, 1x Abendessen, jeweils excl. Getränke
                         </p>
                     </div>
                 </div>
@@ -206,13 +221,13 @@
             @*<p class="text-center wow fadeInDown">Eine kleine Fotoauswahl von einer Probefahrt</p>*@
         </div>
         @*<div class="text-center">
-        <ul class="portfolio-filter">
-            <li><a class="active" href="#" data-filter="*">Alle</a></li>
-            <li><a href="#" data-filter=".creative">Creative</a></li>
-            <li><a href="#" data-filter=".corporate">Corporate</a></li>
-            <li><a href="#" data-filter=".portfolio">Portfolio</a></li>
-        </ul><!--/#portfolio-filter-->
-        </div>*@
+            <ul class="portfolio-filter">
+                <li><a class="active" href="#" data-filter="*">Alle</a></li>
+                <li><a href="#" data-filter=".creative">Creative</a></li>
+                <li><a href="#" data-filter=".corporate">Corporate</a></li>
+                <li><a href="#" data-filter=".portfolio">Portfolio</a></li>
+            </ul><!--/#portfolio-filter-->
+            </div>*@
         <div class="portfolio-items">
             <div class="portfolio-item creative">
                 <div class="portfolio-item-inner">
@@ -257,3 +272,11 @@
         </div>
     </div><!--/.container-->
 </section><!--/#portfolio-->
+
+@section scripts {
+<script>
+    $("#printThePage").click(function () {
+        window.location.href = '/treffen2017/forprinting.pdf';
+        });
+</script>
+}
