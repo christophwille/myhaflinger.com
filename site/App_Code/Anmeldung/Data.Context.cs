@@ -67,5 +67,10 @@ namespace MyHaflinger.Anmeldung.Data
         {
             return this.Update(reg);
         }
+
+        public List<EmailChallenge> GetEmailChallenges()
+        {
+            return this.Table<EmailChallenge>().OrderByDescending(r => r.ChallengeRequested).ToList();
+        }
     }
 }
