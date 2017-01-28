@@ -4,6 +4,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
+using System.Web;
+using System.Web.Helpers;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 
 [assembly: OwinStartup(typeof(Startup))]
 

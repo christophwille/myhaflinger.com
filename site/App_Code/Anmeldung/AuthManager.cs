@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.Security.Principal;
+using System.Web;
 
 namespace MyHaflinger.Anmeldung
 {
@@ -41,6 +42,22 @@ namespace MyHaflinger.Anmeldung
             claimsIdentity.AddClaim(adminClaim);
 
             return claimsIdentity;
+        }
+    }
+
+    public static class AdminPanel
+    {
+        public static void RequireSsl()
+        {
+            var owinContext = System.Web.HttpContext.Current.GetOwinContext();
+
+            if (owinContext.Request.Uri.IsLoopback) return;
+
+            if (owinContext.Request.Uri.Scheme != Uri.UriSchemeHttps)
+            {
+                var builder = new UriBuilder(owinContext.Request.Uri) {Scheme = Uri.UriSchemeHttps};
+                owinContext.Response.Redirect(builder.ToString());
+            }
         }
     }
 }
