@@ -55,8 +55,24 @@ namespace MyHaflinger.Anmeldung
 
             if (owinContext.Request.Uri.Scheme != Uri.UriSchemeHttps)
             {
-                var builder = new UriBuilder(owinContext.Request.Uri) {Scheme = Uri.UriSchemeHttps};
+                var builder = new UriBuilder(owinContext.Request.Uri) {Scheme = Uri.UriSchemeHttps, Port = -1};
                 owinContext.Response.Redirect(builder.ToString());
+            }
+        }
+
+        public static void RequireAuthN(IPrincipal user)
+        {
+            if (!user.Identity.IsAuthenticated)
+            {
+                System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
+            }
+        }
+
+        public static void RequireAuthNKassierAuthZ(IPrincipal user)
+        {
+            if (!user.Identity.IsAuthenticated || !user.IsKassier())
+            {
+                System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
             }
         }
     }

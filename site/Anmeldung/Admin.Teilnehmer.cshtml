@@ -8,10 +8,8 @@
     <link href="~/Content/tablesorter-style.css" rel="stylesheet">
 }
 @{
-    if (!User.Identity.IsAuthenticated)
-    {
-        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
-    }
+    AdminPanel.RequireSsl();
+    AdminPanel.RequireAuthN(User);
 
     var ctx = DbFactory.CreateContext(this.Server);
     var registrations = ctx.GetRegisteredParticipants();
@@ -50,7 +48,7 @@
                             {
                                 <a href="@Href("Admin.TeilnehmerZahlungsdaten.cshtml?id=" + r.Id)">Zahlung</a>
                             }
-                            @:| 
+                            @:|
                             <a href="@Href("Admin.TeilnehmerDetails.cshtml?id=" + r.Id)">Details</a>
                         }</td>
                         <td>@r.Id</td>

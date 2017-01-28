@@ -1,10 +1,9 @@
 ﻿@using ClosedXML.Excel
+@using MyHaflinger.Anmeldung
 @using MyHaflinger.Anmeldung.Data
 @{
-    if (!User.Identity.IsAuthenticated)
-    {
-        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
-    }
+    AdminPanel.RequireSsl();
+    AdminPanel.RequireAuthN(User);
 
     string fileName = "Teilnehmer.xlsx";
 

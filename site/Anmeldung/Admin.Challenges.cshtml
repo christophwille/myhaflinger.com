@@ -6,11 +6,8 @@
 }
 @{
     AdminPanel.RequireSsl();
+    AdminPanel.RequireAuthN(User);
 
-    if (!User.Identity.IsAuthenticated)
-    {
-        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
-    }
 
     var ctx = DbFactory.CreateContext(this.Server);
     var challenges = ctx.GetEmailChallenges();

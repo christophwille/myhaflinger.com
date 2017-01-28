@@ -5,10 +5,8 @@
     Layout = "~/Shared/_Layout.Anmeldung.cshtml";
 }
 @{
-    if (!User.Identity.IsAuthenticated || !User.IsKassier())
-    {
-        System.Web.HttpContext.Current.GetOwinContext().Authentication.Challenge();
-    }
+    AdminPanel.RequireSsl();
+    AdminPanel.RequireAuthNKassierAuthZ(User);
 
     Validation.Add("inputPaymentAmount",
         Validator.Required("Zahlungsbetrag muß angegeben sein"),
