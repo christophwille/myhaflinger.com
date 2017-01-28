@@ -54,12 +54,12 @@
             @Html.ValidationSummary()
             <div class="form-group">
                 <label for="username">Benutzername: </label>
-                <input id="username" name="username" class="form-control" />
+                <input type="text" id="username" name="username" class="form-control" />
                 @Html.ValidationMessage("username")
             </div>
             <div class="form-group">
                 <label for="password">Passwort: </label>
-                <input id="password" name="password" class="form-control" />
+                <input type="password" id="password" name="password" class="form-control" />
                 @Html.ValidationMessage("password")
             </div>
             <button type="submit" class="btn btn-default">Anmelden</button>
