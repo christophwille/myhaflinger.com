@@ -7,18 +7,6 @@
 
 }
 
-@*@section head {
-    <style>
-        .navbar-h1 {
-            float: left;
-            height: 50px;
-            padding: 15px 15px;
-            font-size: 30px;
-            line-height: 20px;
-        }
-    </style>
-}*@
-
     <header id="header">
         <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
             <div class="container">
@@ -30,7 +18,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/"><img src="images/logo.png" alt="logo"></a>
-                    @*<h1 class="navbar-h1">Haflingerfreunde Salzkammergut</h1>*@
+                    <h1 class="navbar-h1">Haflingerfreunde<br/>Salzkammergut</h1>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">
@@ -38,6 +26,7 @@
                         <li class="scroll active"><a href="#cta">Aktuelles</a></li>
                         <li class="scroll"><a href="#aboutus">&Uuml;ber uns</a></li>
                         <li class="scroll"><a href="#events">Treffen</a></li>
+                        <li class="scroll"><a href="/fotos/">Fotos</a></li>
                         <li class="scroll"><a href="#videos">Videos</a></li>
                         <li class="scroll"><a href="#contact">Kontakt</a></li>
                     </ul>
@@ -56,45 +45,45 @@
                                 <div class="carousel-content">
                                     <h2>Treffen 2017</h2>
                                     <p>Das 9. Internationale Salzkammergut Haflingertreffen findet im Juni 2017 statt.</p>
-                                    <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen</a>
+                                    <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen und Anmeldung</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div><!--/.item-->
+@*
+    <div class="item" style="background-image: url(images/slider/bg_illingerbergalm2016.jpg);">
+        <div class="slider-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="carousel-content">
+                            <h2>Illingerbergalm</h2>
+                            <p>Ein Geburtstagsausflug unseres Vereins im benachbarten Salzburgischen</p>
+                            <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/Illingerbergalm2016/")">Mehr Fotos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.item-->*@
 
-            <div class="item" style="background-image: url(images/slider/bg_illingerbergalm2016.jpg);">
-                <div class="slider-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="carousel-content">
-                                    <h2>Illingerbergalm</h2>
-                                    <p>Ein Geburtstagsausflug unseres Vereins im benachbarten Salzburgischen</p>
-                                    <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/Illingerbergalm2016/")">Mehr Fotos</a>
-                                </div>
-                            </div>
+    <div class="item" style="background-image: url(images/slider/bg_kotalm2016.jpg);">
+        <div class="slider-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="carousel-content">
+                            <h2>Kotalm</h2>
+                            <p>Vereinsausflug auf die Kotalm (Hohe Schrott), Ausklang in der Rettenbachalm.</p>
+                            <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/Kotalm2016/")">Mehr Fotos</a>
                         </div>
                     </div>
                 </div>
-            </div><!--/.item-->
-
-            <div class="item" style="background-image: url(images/slider/bg_kotalm2016.jpg);">
-                <div class="slider-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="carousel-content">
-                                    <h2>Kotalm</h2>
-                                    <p>Vereinsausflug auf die Kotalm (Hohe Schrott), Ausklang in der Rettenbachalm.</p>
-                                    <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/Kotalm2016/")">Mehr Fotos</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/.item-->
+            </div>
+        </div>
+    </div><!--/.item-->
         </div><!--/.owl-carousel-->
     </section><!--/#main-slider-->
 
