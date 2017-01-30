@@ -53,8 +53,12 @@
     string token = Request.QueryString["token"];
     string emailAddress = ctx.GetEmailForChallengeToken(token);
 
+    var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
+    string ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+
     if (String.IsNullOrWhiteSpace(emailAddress))
     {
+        logger.Trace("REG:S:F:ERR: Invalid token {0} from {1}", token, ipAddress);
         nextFormAction = FormActionEnum.ShowFormInitError;
     }
 
@@ -90,7 +94,6 @@
             reg = ctx.RegisterParticipant(reg);
 
             string reg4Logging = JsonConvert.SerializeObject(reg, Formatting.None);
-            var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
             logger.Trace("REG:S:F: Teilnehmer {0} was registered properly", reg.Name);
             logger.Trace("REG:S:F:D: Teilnehmer {0} data: {1}", reg.Name, reg4Logging);
 

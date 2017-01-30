@@ -9,7 +9,7 @@
     AdminPanel.RequireSsl();
     AdminPanel.RequireAuthN(User);
 
-    const int numOfRecords = 50;
+    const int numOfRecords = 100;
 
     // // Taken from: http://jonskeet.uk/csharp/miscutil/ via https://stackoverflow.com/questions/10409977/how-to-efficiently-read-only-last-line-of-the-text-file
     var lines = new ReverseLineReader(Server.MapPath("~/App_Data/AnmeldungLog.txt"));

@@ -14,6 +14,8 @@ namespace MyHaflinger.Anmeldung.Data
         public string EmailAddress { get; set; }
         public string ChallengeGuid { get; set; }
         public DateTime ChallengeRequested { get; set; }
+
+        public DateTime? FirstTokenRedemption { get; set; }
     }
 
     public class Registration
