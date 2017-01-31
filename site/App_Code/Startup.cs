@@ -16,11 +16,20 @@ public class Startup
 {
     public void Configuration(IAppBuilder app)
     {
+        CookieSecureOption option = CookieSecureOption.Always;
+        if (app.Properties.ContainsKey("host.AppMode") && (string)app.Properties["host.AppMode"] == "development")
+        {
+            option = CookieSecureOption.Never;
+        }
+
         app.UseCookieAuthentication(new CookieAuthenticationOptions
         {
             AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-            LoginPath = new PathString("/Anmeldung/Admin.Login/")
+            LoginPath = new PathString("/Anmeldung/Admin.Login/"),
+            CookieHttpOnly = true,
+            CookieSecure = option
         });
+
         // Use a cookie to temporarily store information about a user logging in with a third party login provider
         app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
     }

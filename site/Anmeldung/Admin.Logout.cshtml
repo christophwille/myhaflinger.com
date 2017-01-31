@@ -1,6 +1,9 @@
 ﻿@using Microsoft.Owin.Security
 @using Microsoft.AspNet.Identity
+@using MyHaflinger.Anmeldung
 @{
+    AdminPanel.RequireSsl();
+
     var authenticationManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
     authenticationManager.SignOut();
     Response.Redirect("./");
