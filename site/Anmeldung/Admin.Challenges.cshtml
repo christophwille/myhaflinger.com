@@ -33,10 +33,10 @@
                 {
                     var link = $"http://{host}/Anmeldung/Formular?token={line.ChallengeGuid}";
                     <tr>
-                        <td>@line.ChallengeRequested</td>
+                        <td><nobr>@(line.ChallengeRequested.ToString("dd.MM.yy H:mm"))</nobr></td>
                         <td>@line.EmailAddress</td>
                         <td>@link</td>
-                        <td>@line.FirstTokenRedemption</td>
+                        <td><nobr>@(line.FirstTokenRedemption?.ToString("dd.MM.yy H:mm"))</nobr></td>
                     </tr>
                 }
             </tbody>

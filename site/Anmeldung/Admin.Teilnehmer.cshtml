@@ -52,7 +52,7 @@
                             <a href="@Href("Admin.TeilnehmerDetails.cshtml?id=" + r.Id)">Details</a>
                         }</td>
                         <td>@r.Id</td>
-                        <td>@r.RegisteredAt</td>
+                        <td><nobr>@(r.RegisteredAt.ToString("dd.MM.yy H:mm"))</nobr></td>
                         <td>
                             @{
                                 if (r.HasRegistrationNotes)
