@@ -1,61 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Web;
 
 public class ConfigurationService
 {
+    public string ContactFormTo => GetSetting("ContactFormTo");
+
+    public string MailFromAddress => GetSetting("MailFromAddress");
+
+    public string SmtpUsername => GetSetting("SmtpUsername");
+
+    public string SmtpPassword => GetSetting("SmtpPassword");
+
+    public string SmtpHost => GetSetting("SmtpHost");
+
+    public string SmtpPort => GetSetting("SmtpPort");
+
+
+
     private string GetSetting(string settingName)
     {
         return ConfigurationManager.AppSettings[settingName];
-    }
-    
-    public string ContactFormTo
-    {
-        get
-        {
-            return GetSetting("ContactFormTo");
-        }
-    }
-
-    public string MailFromAddress
-    {
-        get
-        {
-            return GetSetting("MailFromAddress");
-        }
-    }
-
-    public string SmtpUsername
-    {
-        get
-        {
-            return GetSetting("SmtpUsername");
-        }
-    }
-
-    public string SmtpPassword
-    {
-        get
-        {
-            return GetSetting("SmtpPassword");
-        }
-    }
-
-    public string SmtpHost
-    {
-        get
-        {
-            return GetSetting("SmtpHost");
-        }
-    }
-
-    public string SmtpPort
-    {
-        get
-        {
-            return GetSetting("SmtpPort");
-        }
     }
 
     private bool ParseBooleanSetting(string settingName, bool defaultValue = false)
