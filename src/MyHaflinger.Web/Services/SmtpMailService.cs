@@ -2,15 +2,16 @@
 using System;
 using System.Net;
 using System.Net.Mail;
+using MyHaflinger.Web.Models;
 
 namespace MyHaflinger.Web.Services
 {
     public class SmtpMailService
     {
-        private readonly ConfigurationService _configurationService;
+        private readonly AppOptions _configurationService;
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public SmtpMailService(ConfigurationService configurationService)
+        public SmtpMailService(AppOptions configurationService)
         {
             _configurationService = configurationService;
         }
