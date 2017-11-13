@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewData["Title"]</title>
+    @RenderSection("head", required: false)
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="container">
+            <p>administrivia: <a href="TailOfLog"> tail of log</a> | <a href="Challenges">challenges</a></p>
+        </div>
+    }
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@page
+@model MyHaflinger.Web.Pages.Anmeldung.StartModel
+@{
+    ViewData["Title"] = "Anmeldung: Validierung der Emailadresse";
+    Layout = "_Layout.Anmeldung";
+
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Anmeldung: Schritt 1</h1>
+        <p>
+            Als ersten Schritt validieren wir Deine Emailadresse - damit auch sicher alle spätere Kommunikation bei Dir ankommt (Zahlungsinformationen, last-minute Updates zu
+            den Ausfahrten, usw). Nach Eingabe der Emailadresse schicken wir Dir eine Email die einen Link enthält mit dem Du die Anmeldung komplettieren kannst.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post" class="form-inline">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmailAddress">Emailadresse: </label>
+                <input asp-for="EmailAddress" type="email" class="form-control"
+                       placeholder="ich@beispiel.com" />
+            </div>
+            <button type="submit" class="btn btn-default">Abschicken</button>
+        </form>
+    </div>
+</div>

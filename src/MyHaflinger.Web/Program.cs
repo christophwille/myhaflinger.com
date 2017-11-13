@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace MyHaflinger.Web
 {
@@ -14,12 +15,17 @@ namespace MyHaflinger.Web
     {
         public static void Main(string[] args)
         {
+            // https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
+            // https://github.com/NLog/NLog.Web/issues/211 (see for version dependencies)
+            var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+
             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseNLog()
                 .Build();
     }
 }
