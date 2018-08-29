@@ -5,7 +5,9 @@
     ViewData["Keywords"] = "Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Veranstaltung,Ausfahrt,Auto";
     ViewData["Description"] = "Homepage der Haflingerfreunde Salzkammergut. Informationen zu kommenden und historischen Teffen der Steyr Puch Haflinger in Bad Ischl im Salzkammergut.";
 }
-
+@section head {
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css" type="text/css">
+}
 <header id="header">
     <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
         <div class="container">
@@ -43,8 +45,8 @@
                         <div class="col-sm-6">
                             <div class="carousel-content">
                                 <h2>Treffen 2017</h2>
-                                <p>Das 9. Internationale Salzkammergut Haflingertreffen findet im Juni 2017 statt.</p>
-                                <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen und Anmeldung</a>
+                                <p>Das 9. Internationale Salzkammergut Haflingertreffen fand im Juni 2017 statt.</p>
+                                <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen</a>
                             </div>
                         </div>
                     </div>
@@ -107,8 +109,8 @@
         <div class="section-header">
             <h2 class="section-title text-center wow fadeInDown">Treffen</h2>
             <p class="text-center wow fadeInDown">
-                Das n&auml;chste Treffen findet 2017 statt. <a href="@Href("/treffen2017/")">Mehr Informationen</a><br />
-                Untenstehend findet Ihr eine Liste von vergangenen Veranstaltungen.
+                Das letzte Treffen fand 2017 statt. <a href="@Href("/treffen2017/")">Mehr Informationen</a><br />
+                Untenstehend eine Liste von vergangenen Veranstaltungen.
             </p>
         </div>
         <div class="row">
@@ -199,7 +201,7 @@
 </section><!--/#videos-->
 
 <section id="contact">
-    <div id="google-map" style="height:650px" data-latitude="47.7078028" data-longitude="13.6074287"></div>
+    <div id="backgroundmap" style="height: 650px" data-latitude="47.7078028" data-longitude="13.6074287"></div>
     <div class="container-wrapper">
         <div class="container">
             <div class="row">
@@ -234,6 +236,6 @@
     </div>
 </section><!--/#contact-->
 
-@section scripts{
-    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+@section scripts {
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
 }
