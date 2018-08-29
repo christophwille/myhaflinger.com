@@ -1,9 +1,4 @@
-﻿
-//namespace MyHaflinger.Web
-//{
-//    public class Program
-//    {
-//        public static void Main(string[] args)
+﻿//        public static void Main(string[] args)
 //        {
 //            // https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
 //            // https://github.com/NLog/NLog.Web/issues/211 (see for version dependencies)
@@ -18,7 +13,6 @@
 //                .UseNLog()
 //                .Build();
 //    }
-//}
 
 using System;
 using System.Collections.Generic;

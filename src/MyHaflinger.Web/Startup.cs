@@ -1,10 +1,3 @@
-//            app.UseMvc(routes =>
-//            {
-//                routes.MapRoute(
-//                    name: "default",
-//                    template: "{controller}/{action=Index}/{id?}");
-//            });
-
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,7 +55,13 @@ namespace MyHaflinger.Web
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
 
-			app.UseMvc();
+			// app.UseMvc(); doesn't do it for MailFunc controller routing
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller}/{action=Index}/{id?}");
+			});
 		}
 	}
 }
