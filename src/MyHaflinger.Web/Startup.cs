@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyHaflinger.Common.Services;
 using MyHaflinger.Web.Models;
 using MyHaflinger.Web.Services;
 
@@ -34,8 +35,12 @@ namespace MyHaflinger.Web
 
 			AppOptions ao = new AppOptions();
 			Configuration.Bind("AppOptions", ao);
+
 			services.AddSingleton(ao);
+			services.AddSingleton<ISmtpConfiguration>(ao);
+
 			services.AddTransient<AnmeldungsDbFactory>();
+			services.AddTransient<ISmtpMailService, SmtpMailService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
