@@ -1,14 +1,16 @@
 ﻿@using System.Web.Mvc
 @{
-                /**/
+    /**/
 
-                Layout = "~/Shared/_Layout.cshtml";
-                Page.Title = "Haflingerfreunde Salzkammergut";
-                Page.Keywords = "Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Veranstaltung,Ausfahrt,Auto";
-                Page.Description = "Homepage der Haflingerfreunde Salzkammergut. Informationen zu kommenden und historischen Teffen der Steyr Puch Haflinger in Bad Ischl im Salzkammergut.";
+    Layout = "~/Shared/_Layout.cshtml";
+    Page.Title = "Haflingerfreunde Salzkammergut";
+    Page.Keywords = "Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Veranstaltung,Ausfahrt,Auto";
+    Page.Description = "Homepage der Haflingerfreunde Salzkammergut. Informationen zu kommenden und historischen Teffen der Steyr Puch Haflinger in Bad Ischl im Salzkammergut.";
 
 }
-
+@section head {
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css" type="text/css">
+}
 <header id="header">
     <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
         <div class="container">
@@ -202,13 +204,13 @@
 </section><!--/#videos-->
 
 <section id="contact">
-    <div id="google-map" style="height:650px" data-latitude="47.7078028" data-longitude="13.6074287"></div>
+    <div id="backgroundmap" style="height: 650px" data-latitude="47.7078028" data-longitude="13.6074287"></div>
     <div class="container-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-8">
                     <div class="contact-form">
-                        <h3>Kontakt</h3>
+                        <h3 style="z-index:5000">Kontakt</h3>
                         <address>
                             <strong>Haflingerfreunde Salzkammergut</strong><br>
                             pA Friedo J&auml;ger<br>
@@ -237,6 +239,6 @@
     </div>
 </section><!--/#contact-->
 
-@section scripts{
-    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+@section scripts {
+        <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
 }
