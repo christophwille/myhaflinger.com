@@ -51,7 +51,10 @@ namespace MyHaflinger.Web.Controllers
 
 		public async Task<bool> SendAnfrageFormularMail(MailJson mm, ISmtpMailService smtpMailService)
 		{
-			var engine = new EngineFactory().Create(new FileSystemRazorProject("/"), null);
+			var engine = new RazorLightEngineBuilder()
+				.UseMemoryCachingProvider()
+				.Build();
+			
 			string msgToSend = await engine.CompileRenderAsync("anfrageTemplateKey", AnfrageTemplate, mm);
 
 			return await smtpMailService.SendMailAsync(_ao.ContactFormTo, "myhaflinger.com Kontaktformular", msgToSend, true, _ao.MailFromAddress);
