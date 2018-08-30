@@ -1,0 +1,196 @@
+﻿@page
+@using MyHaflinger.Common
+@using MyHaflinger.Treffen
+@model MyHaflinger.Web.Pages.Anmeldung.FormularModel
+@{
+    ViewData["Title"] = "Treffenanmeldung";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+@if (Model.NextFormAction == FormActionEnum.ShowForm)
+{
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Anmeldeformular</h1>
+            <p>Bis auf die Felder Telefon und Bemerkungen sind alle Felder verpflichtend</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EmailAddress" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.EmailAddress</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" type="text" class="form-control" placeholder="Vorname Nachname">
+                        @Html.ValidationMessage("Name")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Street" class="col-sm-2 control-label">Stra&szlig;e</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Street" type="text" class="form-control" placeholder="Straße">
+                        @Html.ValidationMessage("Street")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Zip" class="col-sm-2 control-label">Postleitzahl</label>
+                    <div class="col-sm-2">
+                        <input asp-for="Zip" type="text" class="form-control" placeholder="Postleitzahl">
+                        @Html.ValidationMessage("Zip")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="col-sm-2 control-label">Stadt</label>
+                    <div class="col-sm-10">
+                        <input asp-for="City" type="text" class="form-control" placeholder="Stadt">
+                        @Html.ValidationMessage("City")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="col-sm-2 control-label">Land</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Country" type="text" class="form-control" placeholder="Land">
+                        @Html.ValidationMessage("Country")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LicensePlate" class="col-sm-2 control-label">Kennzeichen</label>
+                    <div class="col-sm-10">
+                        <input asp-for="LicensePlate" type="text" class="form-control" placeholder="Kennzeichen">
+                        @Html.ValidationMessage("LicensePlate")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="col-sm-2 control-label">Telefon</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Phone" type="tel" class="form-control">
+                        @Html.ValidationMessage("Phone")
+                    </div>
+                </div>
+
+                <!-- Payment-relevant fields -->
+                <div class="form-group">
+                    <label asp-for="ParticipantsFriday" class="col-sm-2 control-label">Anzahl Teilnehmer Freitag</label>
+                    <div class="col-sm-2">
+                        <input asp-for="ParticipantsFriday" type="number" class="form-control">
+                        @Html.ValidationMessage("ParticipantsFriday")
+                    </div>
+                    <div class="col-sm-4">@AnmeldungSettings.PricePerParticipantFriday EUR / Person</div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ParticipantsSatSun" class="col-sm-2 control-label">Anzahl Teilnehmer Sa/So inkl! Fahrer</label>
+                    <div class="col-sm-2">
+                        <input asp-for="ParticipantsSatSun" type="number" class="form-control">
+                        @Html.ValidationMessage("ParticipantsSatSun")
+                    </div>
+                    <div class="col-sm-4">
+                        <p>
+                            @AnmeldungSettings.PricePerCar EUR / Fahrzeug (inkludiert Fahrer)<br />
+                            @AnmeldungSettings.PricePerPassenger EUR / Beifahrer
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Optional notes to the organizer -->
+                <div class="form-group">
+                    <label asp-for="Notes" class="col-sm-2 control-label">Bemerkungen</label>
+                    <div class="col-sm-10">
+                        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                        @Html.ValidationMessage("Notes")
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Teilnahmebedingungen" class="col-sm-2 control-label">Teilnahmebedingungen akzeptieren</label>
+                    <div class="col-sm-1">
+                        <input asp-for="Teilnahmebedingungen" type="checkbox" class="form-control" />
+                    </div>
+                    <div class="col-sm-9">
+                        <p>
+                            Diese Veranstaltung ist ein genehmigungsfreies Treffen gleichgesinnter Fahrer, Beifahrer und Freunde von Fahrzeugen der
+                            Marke Steyr Puch Haflinger.
+                        </p>
+                        <p>
+                            Die StVO ist w&auml;hrend der gesamten Veranstaltung einzuhalten, die Fahrer sind für die ordnungsgem&auml;&szlig;e Zulassung sowie Versicherung
+                            eigenverantwortlich, und m&uuml;ssen im Besitz der beh&ouml;rdlichen Dokumente sein.
+                        </p>
+                        <p>
+                            Der Veranstalter lehnt jede Haftung f&uuml;r Personen und Sachsch&auml;den, auch gegen Dritte ab, insbesondere beim freien Gel&auml;ndefahren.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Anmeldung abschicken</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <br/>
+        </div>
+    </div>
+}
+else if (Model.NextFormAction == FormActionEnum.ShowFormInitError)
+{
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Anmeldeformular</h1>
+            <p>Ungültiger Token für Schritt 2 der Anmeldung.</p>
+        </div>
+    </div>
+}
+else if (Model.NextFormAction == FormActionEnum.ShowCompletionInfo)
+{
+    <div class="row">
+        <div class="col-md-10">
+
+            <h1>Anmeldung ist erfolgt!</h1>
+            <p>
+                Die folgenden Informationen werden auch in der Bestätigungsemail versandt. Bitte dennoch zusätzlich
+                kopieren / ausdrucken bis die Email einlangt.
+            </p>
+            <p>Name: @Model.Name</p>
+            <p>Emailadresse: @Model.EmailAddress</p>
+            <p>Stra&szlig;e: @Model.Street</p>
+            <p>Postleitzahl: @Model.Zip</p>
+            <p>Stadt: @Model.City</p>
+            <p>Land: @Model.Country</p>
+            <p>Kennzeichen: @Model.LicensePlate</p>
+            <p>Telefon: @Model.Phone</p>
+            <hr/>
+            <p>Teilnehmer Freitag: @Model.ParticipantsFriday</p>
+            <p>Teilnehmer Sa/So: @Model.ParticipantsSatSun</p>
+            <p>Zu zahlender Gesamtpreis (EUR): @Model.TotalPriceOnCompletion</p>
+            <hr/>
+            <p>Bemerkung: @Model.Notes</p>
+
+            <h2>Überweisung Teilnahmebeitrag</h2>
+            <p>
+                Kontoinhaber: Haflingerfreunde Salzkammergut<br/>
+                Bank: Oberbank<br/>
+                IBAN: AT28 1500 0001 7124 3116<br/>
+                BIC: OBKLAT2L<br/>
+            </p>
+        </div>
+    </div>
+}
+
