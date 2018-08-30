@@ -1,0 +1,33 @@
+﻿@page
+@model MyHaflinger.Web.Pages.Anmeldung.Verwaltung.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+<h2>Login</h2>
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Anmeldung für Veranstaltungswarte</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username">Benutzername: </label>
+                <input asp-for="Username" type="text" class="form-control" />
+                @Html.ValidationMessage("Username")
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Passwort: </label>
+                <input asp-for="Password" type="password" class="form-control" />
+                @Html.ValidationMessage("Password")
+            </div>
+            <button type="submit" class="btn btn-default">Anmelden</button>
+        </form>
+    </div>
+</div>

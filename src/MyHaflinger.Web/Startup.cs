@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,11 @@ namespace MyHaflinger.Web
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options =>
+				{
+					options.LoginPath = new PathString("/Anmeldung/Verwaltung/Login");
+				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -40,6 +46,7 @@ namespace MyHaflinger.Web
 			services.AddSingleton<ISmtpConfiguration>(ao);
 
 			services.AddTransient<AnmeldungsDbFactory>();
+			services.AddTransient<AnmeldungsAuthenticationFactory>();
 			services.AddTransient<ISmtpMailService, SmtpMailService>();
 		}
 
@@ -59,6 +66,8 @@ namespace MyHaflinger.Web
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
+
+			app.UseAuthentication();
 
 			// app.UseMvc(); doesn't do it for MailFunc controller routing
 			app.UseMvc(routes =>
