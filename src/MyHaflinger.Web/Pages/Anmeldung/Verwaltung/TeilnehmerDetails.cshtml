@@ -1,0 +1,40 @@
+﻿@page
+@using MyHaflinger.Treffen.AuthX
+@model MyHaflinger.Web.Pages.Anmeldung.Verwaltung.TeilnehmerDetailsModel
+@{
+    ViewData["Title"] = "Teilnehmerdetails";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Teilnehmerdetails</h1>
+        @{
+            if (User.IsKassier())
+            {
+                <p>
+                    <a asp-page="TeilnehmerParticipantsPerDay" asp-route-id="@Model.Registration.Id">Bearbeiten: Anzahl Personen / Tag verändern</a>
+                </p>
+            }
+        }
+        <p>Name: @Model.Registration.Name</p>
+        <p>Emailadress: @Model.Registration.EmailAddress</p>
+        <p>Registrierungsdatum: @Model.Registration.RegisteredAt</p>
+        <p>Stra&szlig;e: @Model.Registration.Street</p>
+        <p>Postleitzahl: @Model.Registration.Zip</p>
+        <p>Ort: @Model.Registration.City</p>
+        <p>Land: @Model.Registration.Country</p>
+        <p>Kennzeichen: @Model.Registration.NumberPlate</p>
+        <p>Telefon: @Model.Registration.Phone</p>
+        <p># Tlnr Freitag: @Model.Registration.PParticipantsFriday</p>
+        <p># Tlnr Samstag: @Model.Registration.PParticipantsSatSun (inkl Fahrer)</p>
+        <p>Berechneter Preis: @Model.Registration.TotalPrice</p>
+        <p>Intern - Betrag bezahlt: @Model.Registration.IntPaymentReceivedAmount</p>
+        <p>Intern - Zahlungsdatum: @Model.Registration.IntPaymentReceivedDate</p>
+        <p>Freitext von Tlnr: @Model.Registration.Notes</p>
+        <hr />
+        <p>Interne Infos</p>
+        <pre>@Model.Registration.IntModificationLog</pre>
+    </div>
+</div>
+

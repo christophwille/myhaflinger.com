@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyHaflinger.Web.Services;
@@ -15,17 +13,8 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	[Authorize]
 	public class DownloadExcelModel : PageModel
 	{
-		public void OnGet([FromServices]AnmeldungsDbFactory dbFactory)
+		public IActionResult OnGet([FromServices]AnmeldungsDbFactory dbFactory)
 		{
-			string fileName = "Teilnehmer.xlsx";
-
-			Response.Clear();
-			// Response.Headers.Clear();
-			// Response.ClearContent();
-
-			Response.Headers.Add("content-disposition", "attachment; filename=" + fileName);
-			Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
 			// https://github.com/closedxml/closedxml/wiki/Copying-IEnumerable-Collections
 			var ctx = dbFactory.CreateContext();
 			var registrations = ctx.GetRegisteredParticipants();
@@ -83,14 +72,14 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 
 				ws.Columns().AdjustToContents();
 
-				using (MemoryStream mStream = new MemoryStream())
+				var mStream = new MemoryStream();
+				wb.SaveAs(mStream);
+				mStream.Position = 0;
+
+				return new FileStreamResult(mStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 				{
-					wb.SaveAs(mStream);
-					
-					mStream.WriteTo(HttpContext.Response.Body);
-					HttpContext.Response.Body.Flush();
-					// HttpContext.Response.Body.EndWrite();
-				}
+					FileDownloadName = "Teilnehmer.xlsx"
+				};
 			}
 		}
 	}

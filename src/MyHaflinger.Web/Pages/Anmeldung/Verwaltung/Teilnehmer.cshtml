@@ -1,0 +1,106 @@
+﻿@page
+@using MyHaflinger.Treffen.AuthX
+@model MyHaflinger.Web.Pages.Anmeldung.Verwaltung.TeilnehmerModel
+@{
+    ViewData["Title"] = "Teilnehmerliste";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+@section head {
+    <link href="~/css/tablesorter-style.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Teilnehmerliste - @Model.Registrations.Count</h1>
+
+        <table id="myTable" class="tablesorter">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Id</th>
+                    <th>Reg-Datum</th>
+                    <th>N</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Land</th>
+                    <th>FR</th>
+                    <th>SA/SO</th>
+                    <th>Zu zahlen</th>
+                    <th>Gezahlt</th>
+                    <th>N</th>
+                    <th>Z-Datum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model.Registrations)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                if (User.IsKassier())
+                                {
+                                    <a asp-page="TeilnehmerZahlungsdaten" asp-route-id="@r.Id">Zahlung</a>
+                                }
+                                @:|
+                                <a asp-page="TeilnehmerDetails" asp-route-id="@r.Id">Details</a>
+                        }
+                    </td>
+                    <td>@r.Id</td>
+                    <td>@(r.RegisteredAt.ToString("dd.MM.yy_HH:mm"))</td>
+                    <td>
+                        @{
+                            if (r.HasRegistrationNotes)
+                            {
+                                <a href="#" data-toggle="tooltip" title="@r.Notes">X</a>
+                            }
+                        }
+                    </td>
+                    <td>@r.Name</td>
+                    <td>@r.EmailAddress</td>
+                    <td>@r.Country</td>
+                    <td>@r.PParticipantsFriday</td>
+                    <td>@r.PParticipantsSatSun</td>
+                    <td>@r.TotalPrice</td>
+                    <td>@r.IntPaymentReceivedAmount</td>
+                    <td>
+                        @{
+                            if (r.HasIntPaymentNotes)
+                            {
+                                <a href="#" data-toggle="tooltip" title="@r.IntPaymentNotes">X</a>
+                            }
+                        }
+                    </td>
+                    <td>@r.IntPaymentReceivedDate</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <p>
+            <a asp-page="DownloadExcel">Download</a> als Exceldatei.
+        </p>
+        <hr />
+        <p>
+            <a asp-page="Logout">Abmelden</a>
+        </p>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Href("~/js/jquery.tablesorter.combined.min.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myTable").tablesorter({ sortList: [[0, 0], [1, 0]] });
+        }
+        );
+    </script>
+}
+
+

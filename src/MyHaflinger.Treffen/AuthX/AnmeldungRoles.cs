@@ -7,8 +7,8 @@ namespace MyHaflinger.Treffen.AuthX
 {
 	public static class AnmeldungRoles
 	{
-		public static string Kassier = "kassier";
-		public static string Veranstaltungswart = "wart";
+		public const string Kassier = "kassier";
+		public const string Veranstaltungswart = "wart";
 
 		public static bool IsKassier(this IPrincipal p)
 		{

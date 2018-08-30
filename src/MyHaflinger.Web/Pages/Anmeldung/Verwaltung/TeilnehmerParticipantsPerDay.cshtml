@@ -1,0 +1,42 @@
+﻿@page
+@model MyHaflinger.Web.Pages.Anmeldung.Verwaltung.TeilnehmerParticipantsPerDayModel
+@{
+    ViewData["Title"] = "Anzahl Personen pro Tag ändern";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Anzahl Personen für @Model.Registration.Name (EUR bisher: @Model.Registration.TotalPrice)</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                <label asp-for="ParticipantsFriday" class="col-sm-2 control-label">Teilnehmer am Freitag</label>
+                <div class="col-sm-2">
+                    <input asp-for="ParticipantsFriday" type="number" class="form-control">
+                    @Html.ValidationMessage("ParticipantsFriday")
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParticipantsSatSun" class="col-sm-2 control-label">Teilnehmer Sa/So inkl Fahrer</label>
+                <div class="col-sm-2">
+                    <input asp-for="ParticipantsSatSun" type="number" class="form-control">
+                    @Html.ValidationMessage("ParticipantsSatSun")
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Speichern</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
