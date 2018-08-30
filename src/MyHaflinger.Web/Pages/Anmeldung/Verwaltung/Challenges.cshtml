@@ -21,7 +21,7 @@
             <tbody>
             @foreach (var line in Model.Challenges)
             {
-                var link = $"https://{Model.Host}/Anmeldung/Formular?token={line.ChallengeGuid}";
+                var link = $"{Model.Scheme}://{Model.Host}/Anmeldung/Formular?token={line.ChallengeGuid}";
                 <tr>
                     <td>@(line.ChallengeRequested.ToString("dd.MM.yy_HH:mm"))</td>
                     <td>@line.EmailAddress</td>

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using MyHaflinger.Common.Services;
 using MyHaflinger.Treffen.Services;
 using MyHaflinger.Web.Models;
@@ -24,6 +22,13 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			_ao = ao;
 		}
 
+		public static string GenerateFormularUrl(HttpContext ctx, string id)
+		{
+			string scheme = ctx.Request.Scheme;
+			string host = ctx.Request.Host.Value;
+			return $"{scheme}://{host}/Anmeldung/Formular?token={id}";
+		}
+
 		[BindProperty]
 		[RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]
 		[Required]
@@ -40,9 +45,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 
 			auditLog.Trace($"REG:S:CH: Email {EmailAddress} registered for challenge");
 
-			string scheme = HttpContext.Request.Scheme;
-			string host = HttpContext.Request.Host.Value;
-			string formularUrl = $"{scheme}://{host}/Anmeldung/Formular?token={guid}";
+			string formularUrl = GenerateFormularUrl(HttpContext, guid);
 
 			var mm = new AnmeldungMailService(smtpMailService, _ao.MailFromAddress);
 			bool mailSentOk = await mm.SendStep1Mail(formularUrl, EmailAddress);
@@ -53,7 +56,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 				return Page();
 			}
 
-			return RedirectToPage("Index");
+			return RedirectToPage("MailGesendet", new { guid, email = EmailAddress });
 		}
 	}
 }

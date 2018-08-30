@@ -15,12 +15,15 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	public class ChallengesModel : PageModel
 	{
 		public List<EmailChallenge> Challenges { get; private set; }
+		public string Scheme { get; private set; }
 		public string Host { get; private set; }
 
 		public void OnGet([FromServices]AnmeldungsDbFactory dbFactory)
 		{
 			Challenges = dbFactory.CreateContext().GetEmailChallenges();
-			Host = Request.Host.Host;
+
+			Scheme = HttpContext.Request.Scheme;
+			Host = HttpContext.Request.Host.Value;
 		}
 	}
 }

@@ -1,0 +1,33 @@
+﻿@page
+@model MyHaflinger.Web.Pages.Anmeldung.MailGesendetModel
+@{
+    ViewData["Title"] = "Mail gesendet";
+    Layout = "~/Pages/_Layout.Anmeldung.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Schritt 1: Ergebnis</h1>
+        <p>
+            Eine Email mit dem Link zur Fortsetzung des Registrierungsvorgangs ist bereits am Weg zu <b>@Model.Email</b> und
+            sollte innerhalb von wenigen Minuten (meist &lt; eine Minute) eingehen. Bitte gegebenenfalls den
+            Spam Ordner kontrollieren!
+        </p>
+        <p>
+            Sollte keine Email kommen (innerhalb von vier Stunden), so w&uuml;rden wir Dich bitten uns zu kontaktieren -
+            <a href="mailto:christoph.wille@gmail.com">Christoph</a> macht die technische Betreuung und kann Dir weiterhelfen.
+        </p>
+        <hr />
+        <p>
+            M&ouml;chtest Du ohne Email weitermachen? Kopiere die untenstehende Adresse in ein neues Browserfenster:
+        </p>
+        <p>
+            <b>@Model.FormularUrl</b>
+        </p>
+        <p>
+            ACHTUNG: Da dann unter Umständen keine Best&auml;tigung für die Registrierung zugestellt werden kann, bitte die
+            Inhalte der Best&auml;tigungsseite kopieren da dort u.a. die Bankdaten und der zu zahlende Betrag aufgef&uuml;hrt sind!
+        </p>
+    </div>
+</div>
+
