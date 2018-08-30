@@ -22,6 +22,13 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			_ao = ao;
 		}
 
+		public IActionResult OnGet()
+		{
+			if (!_ao.RegistrationOpen) return RedirectToPage("/Index");
+
+			return Page();
+		}
+
 		public static string GenerateFormularUrl(HttpContext ctx, string id)
 		{
 			string scheme = ctx.Request.Scheme;

@@ -14,5 +14,6 @@ namespace MyHaflinger.Web.Models
 		public string SmtpPassword { get; set; }
 		public string SmtpHost { get; set; }
 		public string SmtpPort { get; set; }
+		public bool RegistrationOpen { get; set; }
 	} 
 }
