@@ -15,7 +15,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	{
 		public List<string> TailingLogLines { get; private set; }
 
-		public void OnGet([FromServices]AnmeldungsLogFactory logFactory)
+		public void OnGet([FromServices]RegistrationFlowAuditTrailService logFactory)
 		{
 			TailingLogLines = logFactory.GetTailOfLog();
 		}

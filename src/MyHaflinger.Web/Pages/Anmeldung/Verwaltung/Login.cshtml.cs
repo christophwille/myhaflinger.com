@@ -14,12 +14,6 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	public class LoginModel : PageModel
 	{
-		private readonly ILogger _log;
-		public LoginModel(ILogger<PageModel> log)
-		{
-			_log = log;
-		}
-
 		[BindProperty]
 		[Required]
 		public string Username { get; set; }
@@ -27,7 +21,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 		[Required]
 		public string Password { get; set; }
 
-		public async Task<IActionResult> OnPostAsync([FromServices]AnmeldungsAuthenticationFactory authFactory)
+		public async Task<IActionResult> OnPostAsync([FromServices]AnmeldungsAuthenticationFactory authFactory, [FromServices]RegistrationFlowAuditTrailService auditLog)
 		{
 			if (!ModelState.IsValid) return Page();
 
@@ -65,7 +59,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 					// redirect response value.
 				};
 
-				_log.LogTrace("SEC:S: User {0} logged in from {1}", user.Username, ipAddress);
+				auditLog.Trace($"SEC:S: User {user.Username} logged in from {ipAddress}");
 
 				await HttpContext.SignInAsync(
 					CookieAuthenticationDefaults.AuthenticationScheme,
@@ -74,7 +68,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 			}
 			else
 			{
-				_log.LogTrace($"SEC:F: Invalid login atttempt for user {Username} from {ipAddress}");
+				auditLog.Trace($"SEC:F: Invalid login atttempt for user {Username} from {ipAddress}");
 			}
 
 			return Page();

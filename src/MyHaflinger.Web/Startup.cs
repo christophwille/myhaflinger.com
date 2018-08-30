@@ -47,7 +47,7 @@ namespace MyHaflinger.Web
 
 			services.AddTransient<AnmeldungsDbFactory>();
 			services.AddTransient<AnmeldungsAuthenticationFactory>();
-			services.AddTransient<AnmeldungsLogFactory>();
+			services.AddTransient<RegistrationFlowAuditTrailService>();
 			
 			services.AddTransient<ISmtpMailService, SmtpMailService>();
 		}

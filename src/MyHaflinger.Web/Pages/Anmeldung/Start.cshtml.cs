@@ -17,13 +17,11 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 	{
 		private AnmeldungsDbFactory DbFactory { get; }
 		public AppOptions _ao { get; }
-		private readonly ILogger _log;
 
-		public StartModel(AnmeldungsDbFactory dbFactory, ILogger<StartModel> log, AppOptions ao)
+		public StartModel(AnmeldungsDbFactory dbFactory, AppOptions ao)
 		{
 			DbFactory = dbFactory;
 			_ao = ao;
-			_log = log;
 		}
 
 		[BindProperty]
@@ -31,7 +29,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 		[Required]
 		public string EmailAddress { get; set; }
 
-		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService)
+		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]RegistrationFlowAuditTrailService auditLog)
 		{
 			if (!ModelState.IsValid) return Page();
 
@@ -40,8 +38,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			var ctx = DbFactory.CreateContext();
 			ctx.RegisterEmailChallenge(EmailAddress, guid, DateTime.UtcNow);
 
-			var logger = NLog.LogManager.GetLogger("RegistrierungsTrace");
-			logger.Trace("REG:S:CH: Email {0} registered for challenge", EmailAddress);
+			auditLog.Trace($"REG:S:CH: Email {EmailAddress} registered for challenge");
 
 			string scheme = HttpContext.Request.Scheme;
 			string host = HttpContext.Request.Host.Value;
