@@ -45,6 +45,8 @@ namespace MyHaflinger.Web
 					options.LoginPath = new PathString("/Anmeldung/Verwaltung/Login");
 				});
 
+			services.AddResponseCaching();
+
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 			AppOptions ao = new AppOptions();
@@ -78,6 +80,8 @@ namespace MyHaflinger.Web
 			app.UseCookiePolicy();
 
 			app.UseAuthentication();
+
+			app.UseResponseCaching();
 
 			// app.UseMvc(); doesn't do it for MailFunc controller routing
 			app.UseMvc(routes =>

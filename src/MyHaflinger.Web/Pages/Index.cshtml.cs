@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MyHaflinger.Web.Common;
 
 namespace MyHaflinger.Web.Pages
 {
-    public class IndexModel : PageModel
-    {
-        public void OnGet()
-        {
-
-        }
-    }
+	public class IndexModel : PageModel
+	{
+		public void OnGet()
+		{
+			HttpContext.CacheWhenNotLocal();
+		}
+	}
 }
