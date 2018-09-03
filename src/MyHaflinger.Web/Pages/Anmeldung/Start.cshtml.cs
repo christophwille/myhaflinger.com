@@ -37,8 +37,8 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 		}
 
 		[BindProperty]
-		[RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]
-		[Required]
+		[RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$", ErrorMessage = "Ungültiges Format für die Emailadresse")]
+		[Required(ErrorMessage = "Emailadresse muß eingegeben werden")]
 		public string EmailAddress { get; set; }
 
 		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]RegistrationFlowAuditTrailService auditLog)
