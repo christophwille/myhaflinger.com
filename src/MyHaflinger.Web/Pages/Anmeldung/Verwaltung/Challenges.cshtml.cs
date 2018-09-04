@@ -12,6 +12,7 @@ using MyHaflinger.Web.Services;
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	[Authorize]
+	[RequireHttps]
 	public class ChallengesModel : PageModel
 	{
 		public List<EmailChallenge> Challenges { get; private set; }

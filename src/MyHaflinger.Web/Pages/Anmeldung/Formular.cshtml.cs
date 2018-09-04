@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace MyHaflinger.Web.Pages.Anmeldung
 {
+	[RequireHttps]
 	public class FormularModel : PageModel
 	{
 		private readonly AnmeldungsDbFactory _dbFactory;

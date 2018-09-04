@@ -9,6 +9,7 @@ using MyHaflinger.Web.Services;
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	[Authorize]
+	[RequireHttps]
 	public class TeilnehmerModel : PageModel
 	{
 		public List<Registration> Registrations { get; private set; }

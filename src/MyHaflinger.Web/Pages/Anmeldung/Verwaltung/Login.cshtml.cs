@@ -12,6 +12,7 @@ using MyHaflinger.Web.Services;
 
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
+	[RequireHttps]
 	public class LoginModel : PageModel
 	{
 		[BindProperty]

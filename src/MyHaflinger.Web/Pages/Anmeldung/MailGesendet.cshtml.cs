@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MyHaflinger.Web.Pages.Anmeldung
 {
+	[RequireHttps]
 	public class MailGesendetModel : PageModel
 	{
 		public string Email { get; set; }

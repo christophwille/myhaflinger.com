@@ -48,6 +48,10 @@ namespace MyHaflinger.Web
 			services.AddResponseCaching();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.Configure<MvcOptions>(options =>
+			{
+				options.Filters.Add(new RequireHttpsAttribute { Permanent = true });
+			});
 
 			AppOptions ao = new AppOptions();
 			Configuration.Bind("AppOptions", ao);

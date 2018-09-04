@@ -11,6 +11,7 @@ using MyHaflinger.Web.Services;
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	[Authorize]
+	[RequireHttps]
 	public class DownloadExcelModel : PageModel
 	{
 		public IActionResult OnGet([FromServices]AnmeldungsDbFactory dbFactory)

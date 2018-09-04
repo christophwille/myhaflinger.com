@@ -11,6 +11,7 @@ using MyHaflinger.Web.Services;
 
 namespace MyHaflinger.Web.Pages.Anmeldung
 {
+	[RequireHttps]
 	public class StartModel : PageModel
 	{
 		private AnmeldungsDbFactory DbFactory { get; }

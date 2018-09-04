@@ -11,6 +11,7 @@ using MyHaflinger.Web.Services;
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	[Authorize]
+	[RequireHttps]
 	public class TailOfLogModel : PageModel
 	{
 		public List<string> TailingLogLines { get; private set; }

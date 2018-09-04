@@ -13,6 +13,7 @@ using MyHaflinger.Web.Services;
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
 	[Authorize(Roles = AnmeldungRoles.Kassier)]
+	[RequireHttps]
 	public class TeilnehmerParticipantsPerDayModel : PageModel
 	{
 		[BindProperty]

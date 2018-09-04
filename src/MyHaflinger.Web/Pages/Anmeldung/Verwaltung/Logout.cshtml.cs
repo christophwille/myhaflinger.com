@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 {
+	[RequireHttps]
 	public class LogoutModel : PageModel
 	{
 		public async Task<IActionResult> OnGet()
