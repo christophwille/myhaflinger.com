@@ -48,8 +48,8 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 
 			string guid = Guid.NewGuid().ToString();
 
-			var ctx = DbFactory.CreateContext();
-			ctx.RegisterEmailChallenge(EmailAddress, guid, DateTime.UtcNow);
+			var ctx = await DbFactory.CreateContextAsync();
+			await ctx.RegisterEmailChallengeAsync(EmailAddress, guid, DateTime.UtcNow);
 
 			auditLog.Trace($"REG:S:CH: Email {EmailAddress} registered for challenge");
 

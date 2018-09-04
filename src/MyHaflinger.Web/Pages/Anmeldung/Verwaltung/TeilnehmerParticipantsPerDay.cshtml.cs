@@ -28,21 +28,21 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 
 		public Registration Registration { get; private set; }
 
-		public void OnGet([FromServices]AnmeldungsDbFactory dbFactory, int id)
+		public async Task OnGetAsync([FromServices]AnmeldungsDbFactory dbFactory, int id)
 		{
-			var ctx = dbFactory.CreateContext();
-			Registration = ctx.GetRegisteredParticipant(id);
+			var ctx = await dbFactory.CreateContextAsync();
+			Registration = await ctx.GetRegisteredParticipantAsync(id);
 
 			ParticipantsFriday = Registration.PParticipantsFriday;
 			ParticipantsSatSun = Registration.PParticipantsSatSun;
 		}
 
-		public IActionResult OnPost([FromServices]AnmeldungsDbFactory dbFactory, int id)
+		public async Task<IActionResult> OnPostAsync([FromServices]AnmeldungsDbFactory dbFactory, int id)
 		{
 			if (!ModelState.IsValid) return Page();
 
-			var ctx = dbFactory.CreateContext();
-			var reg = ctx.GetRegisteredParticipant(id);
+			var ctx = await dbFactory.CreateContextAsync();
+			var reg = await ctx.GetRegisteredParticipantAsync(id);
 
 			reg.PParticipantsFriday = ParticipantsFriday;
 			reg.PParticipantsSatSun = ParticipantsSatSun;
@@ -50,7 +50,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 			string modMessage = $"{User.Identity.Name} hat um {DateTime.UtcNow} Anzahl Personen Fr/Sa/So verändert\r\n";
 			reg.IntModificationLog = modMessage + reg.IntModificationLog;
 
-			ctx.UpdateRegisteredParticipant(reg);
+			await ctx.UpdateRegisteredParticipantAsync(reg);
 			return RedirectToPage("Teilnehmer");
 		}
 	}

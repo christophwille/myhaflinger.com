@@ -16,10 +16,10 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	{
 		public Registration Registration { get; private set; }
 
-		public void OnGet([FromServices]AnmeldungsDbFactory dbFactory, int id)
+		public async Task OnGetAsync([FromServices]AnmeldungsDbFactory dbFactory, int id)
 		{
-			var ctx = dbFactory.CreateContext();
-			Registration = ctx.GetRegisteredParticipant(id);
+			var ctx = await dbFactory.CreateContextAsync();
+			Registration = await ctx.GetRegisteredParticipantAsync(id);
 		}
 	}
 }

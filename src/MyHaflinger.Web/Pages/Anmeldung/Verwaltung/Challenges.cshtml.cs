@@ -19,9 +19,9 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 		public string Scheme { get; private set; }
 		public string Host { get; private set; }
 
-		public void OnGet([FromServices]AnmeldungsDbFactory dbFactory)
+		public async Task OnGetAsync([FromServices]AnmeldungsDbFactory dbFactory)
 		{
-			Challenges = dbFactory.CreateContext().GetEmailChallenges();
+			Challenges = await (await dbFactory.CreateContextAsync()).GetEmailChallengesAsync();
 
 			Scheme = HttpContext.Request.Scheme;
 			Host = HttpContext.Request.Host.Value;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,11 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	[RequireHttps]
 	public class DownloadExcelModel : PageModel
 	{
-		public IActionResult OnGet([FromServices]AnmeldungsDbFactory dbFactory)
+		public async Task<IActionResult> OnGetAsync([FromServices]AnmeldungsDbFactory dbFactory)
 		{
 			// https://github.com/closedxml/closedxml/wiki/Copying-IEnumerable-Collections
-			var ctx = dbFactory.CreateContext();
-			var registrations = ctx.GetRegisteredParticipants();
+			var ctx = await dbFactory.CreateContextAsync();
+			var registrations = await ctx.GetRegisteredParticipantsAsync();
 
 			var regTrimmed = registrations.Select(r => new
 			{

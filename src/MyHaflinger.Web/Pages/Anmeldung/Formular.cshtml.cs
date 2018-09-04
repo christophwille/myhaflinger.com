@@ -71,16 +71,16 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			NextFormAction = FormActionEnum.ShowFormInitError;
 		}
 
-		private string RetrieveEmailAddressForToken(string token)
+		private async Task<string> RetrieveEmailAddressForToken(string token)
 		{
-			var dbCtx = _dbFactory.CreateContext();
-			return dbCtx.GetEmailForChallengeToken(token);
+			var dbCtx = await _dbFactory.CreateContextAsync();
+			return await dbCtx.GetEmailForChallengeTokenAsync(token);
 		}
 
 		// URL sample: http://myhaflinger.com/Anmeldung/Formular?token=2a75f00f-9e42-4698-8f59-60a9ff56cd0e
-		public void OnGet(string token)
+		public async Task OnGetAsync(string token)
 		{
-			string emailAddress = RetrieveEmailAddressForToken(token);
+			string emailAddress = await RetrieveEmailAddressForToken(token);
 
 			if (String.IsNullOrWhiteSpace(emailAddress))
 			{
@@ -98,7 +98,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 
 		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, string token)
 		{
-			EmailAddress = RetrieveEmailAddressForToken(token);
+			EmailAddress = await RetrieveEmailAddressForToken(token);
 
 			// This is over-the-top security in our simple reg case, just to get rid of the overly curious playing with the query string
 			if (String.IsNullOrWhiteSpace(EmailAddress))
@@ -133,8 +133,8 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 				RegisteredAt = DateTime.UtcNow
 			};
 
-			var dbCtx = _dbFactory.CreateContext();
-			reg = dbCtx.RegisterParticipant(reg);
+			var dbCtx = await _dbFactory.CreateContextAsync();
+			reg = await dbCtx.RegisterParticipantAsync(reg);
 
 			string reg4Logging = JsonConvert.SerializeObject(reg, Formatting.None);
 			_auditLog.Trace($"REG:S:F: Teilnehmer {reg.Name} was registered properly");

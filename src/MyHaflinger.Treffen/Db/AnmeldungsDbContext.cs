@@ -1,71 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using SQLite;
 
 namespace MyHaflinger.Treffen.Db
 {
-    public class AnmeldungsDbContext : SQLiteConnection
-    {
-        public AnmeldungsDbContext(string path) : base(path)
-        {
-            CreateTable<EmailChallenge>();
-            CreateTable<Registration>();
-        }
+	public class AnmeldungsDbContext : SQLiteAsyncConnection
+	{
+		public AnmeldungsDbContext(string path) : base(path)
+		{
+		}
 
-        public void RegisterEmailChallenge(string emailadress, string guid, DateTime registrationTime)
-        {
-            var newKey = this.Insert(new EmailChallenge()
-            {
-                EmailAddress = emailadress,
-                ChallengeGuid = guid,
-                ChallengeRequested = registrationTime
-            });
-        }
+		public async Task CreateTablesAsync()
+		{
+			await CreateTablesAsync<EmailChallenge, Registration>().ConfigureAwait(false);
+		}
 
-        public string GetEmailForChallengeToken(string token)
-        {
-            var challenge = Table<EmailChallenge>().Where(c => c.ChallengeGuid == token).FirstOrDefault();
+		public async Task RegisterEmailChallengeAsync(string emailadress, string guid, DateTime registrationTime)
+		{
+			var newKey = await this.InsertAsync(new EmailChallenge()
+			{
+				EmailAddress = emailadress,
+				ChallengeGuid = guid,
+				ChallengeRequested = registrationTime
+			}).ConfigureAwait(false);
+		}
 
-            if (null != challenge)
-            {
-                if (null == challenge.FirstTokenRedemption)
-                {
-                    challenge.FirstTokenRedemption = DateTime.UtcNow;
-                    this.Update(challenge);
-                }
+		public async Task<string> GetEmailForChallengeTokenAsync(string token)
+		{
+			var challenge = await Table<EmailChallenge>().Where(c => c.ChallengeGuid == token).FirstOrDefaultAsync().ConfigureAwait(false);
 
-                return challenge.EmailAddress;
-            }
+			if (null != challenge)
+			{
+				if (null == challenge.FirstTokenRedemption)
+				{
+					challenge.FirstTokenRedemption = DateTime.UtcNow;
+					int changed = await this.UpdateAsync(challenge).ConfigureAwait(false);
+				}
 
-            return "";
-        }
+				return challenge.EmailAddress;
+			}
 
-        public Registration RegisterParticipant(Registration reg)
-        {
-            var newKey = this.Insert(reg);
-            return reg;
-        }
+			return "";
+		}
 
-        public List<Registration> GetRegisteredParticipants()
-        {
-            return this.Table<Registration>().OrderByDescending(r => r.Id).ToList();
-        }
+		public async Task<Registration> RegisterParticipantAsync(Registration reg)
+		{
+			var newKey = await this.InsertAsync(reg).ConfigureAwait(false);
+			return reg;
+		}
 
-        public Registration GetRegisteredParticipant(int id)
-        {
-            var reg = Table<Registration>().Where(c => c.Id == id).FirstOrDefault();
-            return reg;
-        }
+		public async Task<List<Registration>> GetRegisteredParticipantsAsync()
+		{
+			return await this.Table<Registration>().OrderByDescending(r => r.Id).ToListAsync().ConfigureAwait(false);
+		}
 
-        public int UpdateRegisteredParticipant(Registration reg)
-        {
-            return this.Update(reg);
-        }
+		public async Task<Registration> GetRegisteredParticipantAsync(int id)
+		{
+			var reg = await Table<Registration>().Where(c => c.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+			return reg;
+		}
 
-        public List<EmailChallenge> GetEmailChallenges()
-        {
-            return this.Table<EmailChallenge>().OrderByDescending(r => r.ChallengeRequested).ToList();
-        }
-    }
+		public async Task<int> UpdateRegisteredParticipantAsync(Registration reg)
+		{
+			return await this.UpdateAsync(reg).ConfigureAwait(false);
+		}
+
+		public async Task<List<EmailChallenge>> GetEmailChallengesAsync()
+		{
+			return await this.Table<EmailChallenge>().OrderByDescending(r => r.ChallengeRequested).ToListAsync().ConfigureAwait(false);
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using MyHaflinger.Treffen.Db;
 
 namespace MyHaflinger.Web.Services
@@ -12,9 +13,11 @@ namespace MyHaflinger.Web.Services
 			_dbDatabaseFilePath = System.IO.Path.Combine(webRoot, "Data", "anmeldungen.db");
 		}
 
-		public AnmeldungsDbContext CreateContext()
+		public async Task<AnmeldungsDbContext> CreateContextAsync()
 		{
-			return new AnmeldungsDbContext(_dbDatabaseFilePath);
+			var context = new AnmeldungsDbContext(_dbDatabaseFilePath);
+			await context.CreateTablesAsync();
+			return context;
 		}
 	}
 }
