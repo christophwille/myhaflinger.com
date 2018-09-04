@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,9 @@ namespace MyHaflinger.Web
 			services.Configure<RequestLocalizationOptions>(options =>
 			{
 				options.DefaultRequestCulture = new RequestCulture("de");
+				options.SupportedCultures = new List<CultureInfo> { new CultureInfo("de") };
+				options.SupportedUICultures = new List<CultureInfo> { new CultureInfo("de") };
+				options.RequestCultureProviders = new List<IRequestCultureProvider>();
 			});
 
 			services.Configure<CookiePolicyOptions>(options =>
@@ -78,6 +83,8 @@ namespace MyHaflinger.Web
 				app.UseExceptionHandler("/Error");
 				app.UseHsts();
 			}
+
+			app.UseRequestLocalization();
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();

@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label asp-for="PaymentAmount" class="col-sm-2 control-label">Erhaltener Zahlungsbetrag</label>
                 <div class="col-sm-10">
-                    <input asp-for="PaymentAmount" type="number"  step="0.01" class="form-control">
+                    <input asp-for="PaymentAmount" type="text" class="form-control">
                     @Html.ValidationMessage("PaymentAmount")
                 </div>
             </div>
