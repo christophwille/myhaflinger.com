@@ -24,7 +24,7 @@ namespace MyHaflinger.Web.Common
 					new CacheControlHeaderValue()
 					{
 						Public = true,
-						MaxAge = TimeSpan.FromMinutes(60)
+						MaxAge = TimeSpan.FromHours(6)
 					};
 
 				// https://stackoverflow.com/questions/52151452/request-currentexecutionfilepath-in-asp-net-core/52152027#52152027

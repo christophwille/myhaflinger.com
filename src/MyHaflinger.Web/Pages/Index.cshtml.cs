@@ -11,6 +11,8 @@ namespace MyHaflinger.Web.Pages
 {
 	public class IndexModel : MyHaflingerBasePageModel
 	{
+		// Caching is dealt with by base class
+		// [ResponseCache(Duration = 3600,Location = ResponseCacheLocation.Any)]
 		public void OnGet()
 		{
 		}
