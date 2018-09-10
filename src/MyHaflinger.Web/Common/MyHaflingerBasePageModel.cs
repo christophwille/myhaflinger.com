@@ -35,11 +35,10 @@ namespace MyHaflinger.Web.Common
 				var fileInfo = new FileInfo(fullPath);
 
 				if (fileInfo.Exists)
-				{ 
+				{
+					// https://stackoverflow.com/questions/50509221/addfiledependency-alternative-in-asp-net-core
 					context.HttpContext.Response.GetTypedHeaders().LastModified = fileInfo.LastWriteTimeUtc;
 				}
-
-				// TODO: context.Response.AddFileDependency(file);
 			}
 		}
 	}
