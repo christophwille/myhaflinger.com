@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MyHaflinger.Common;
 
 namespace MyHaflinger.Treffen.AuthX
 {
@@ -22,7 +23,13 @@ namespace MyHaflinger.Treffen.AuthX
 			string fileContents = File.ReadAllText(_jsonFilePath);
 			var definedAccounts = JsonConvert.DeserializeObject<List<LogonUser>>(fileContents);
 
-			return definedAccounts.FirstOrDefault(a => a.Username == username && a.Password == password);
+			var account = definedAccounts.FirstOrDefault(a => a.Username == username);
+			if (account != null)
+			{
+				if (PBKDF2.ValidatePassword(password, account.Password)) return account;
+			}
+
+			return null;
 		}
 
 		// https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&tabs=aspnetcore2x
