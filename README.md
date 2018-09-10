@@ -1,5 +1,6 @@
 # myhaflinger.com
-Homepage for the vintage car club Haflingerfreunde Salzkammergut
+Homepage for the vintage car club Haflingerfreunde Salzkammergut. You can find the current
+.NET Core 2.1-based version in the \src folder (site* is full-Framework MVC Razor)
 
 ## Website Theme
 
