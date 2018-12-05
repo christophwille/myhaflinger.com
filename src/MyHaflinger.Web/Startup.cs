@@ -52,10 +52,11 @@ namespace MyHaflinger.Web
 
 			services.AddResponseCaching();
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			services.Configure<MvcOptions>(options =>
 			{
 				options.Filters.Add(new RequireHttpsAttribute { Permanent = true });
+				// options.ReturnHttpNotAcceptable = false;
 			});
 
 			AppOptions ao = new AppOptions();
