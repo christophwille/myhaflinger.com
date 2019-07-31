@@ -7,7 +7,7 @@ namespace MyHaflinger.Web.Services
 	public class AnmeldungsDbFactory
 	{
 		private readonly string _dbDatabaseFilePath;
-		public AnmeldungsDbFactory(IHostingEnvironment env)
+		public AnmeldungsDbFactory(IWebHostEnvironment env)
 		{
 			var webRoot = env.ContentRootPath;
 			_dbDatabaseFilePath = System.IO.Path.Combine(webRoot, "Data", "anmeldungen.db");

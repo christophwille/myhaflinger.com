@@ -10,7 +10,7 @@ namespace MyHaflinger.Web.Services
 	public class AnmeldungsAuthenticationFactory
 	{
 		private readonly string _jsonFilePath;
-		public AnmeldungsAuthenticationFactory(IHostingEnvironment env)
+		public AnmeldungsAuthenticationFactory(IWebHostEnvironment env)
 		{
 			var webRoot = env.ContentRootPath;
 			_jsonFilePath = System.IO.Path.Combine(webRoot, "Data", "AnmeldungAccounts.json");
