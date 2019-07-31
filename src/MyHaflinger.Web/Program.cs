@@ -13,6 +13,7 @@
 //                .UseNLog()
 //                .Build();
 //    }
+// https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
 
 using System;
 using System.Collections.Generic;
