@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MyHaflinger.Common;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace MyHaflinger.Treffen.AuthX
 {
@@ -18,17 +19,25 @@ namespace MyHaflinger.Treffen.AuthX
 			_jsonFilePath = jsonFilePath;
 		}
 
-		public LogonUser GetUser(string username, string password)
+		public async Task<LogonUser> GetUserAsync(string username, string password)
 		{
-			string fileContents = File.ReadAllText(_jsonFilePath);
-			var definedAccounts = JsonConvert.DeserializeObject<List<LogonUser>>(fileContents);
-
-			var account = definedAccounts.FirstOrDefault(a => a.Username == username);
-			if (account != null)
+			using (var stream = File.OpenRead(_jsonFilePath))
 			{
-				if (PBKDF2.ValidatePassword(password, account.Password)) return account;
-			}
+				var options = new JsonSerializerOptions
+				{
+					AllowTrailingCommas = true,
+					PropertyNameCaseInsensitive = true
+				};
 
+				var definedAccounts = await JsonSerializer.DeserializeAsync<List<LogonUser>>(stream, options);
+				stream.Close();
+
+				var account = definedAccounts.FirstOrDefault(a => a.Username == username);
+				if (account != null)
+				{
+					if (PBKDF2.ValidatePassword(password, account.Password)) return account;
+				}
+			}
 			return null;
 		}
 

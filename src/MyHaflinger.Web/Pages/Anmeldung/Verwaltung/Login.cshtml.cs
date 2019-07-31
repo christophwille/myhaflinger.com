@@ -27,7 +27,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 			if (!ModelState.IsValid) return Page();
 
 			var authContext = authFactory.CreateContext();
-			var user = authContext.GetUser(Username, Password);
+			var user = await authContext.GetUserAsync(Username, Password);
 
 			string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
