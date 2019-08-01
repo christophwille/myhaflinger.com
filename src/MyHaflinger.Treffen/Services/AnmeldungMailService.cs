@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Threading.Tasks;
 using MyHaflinger.Common.Services;
@@ -9,6 +10,8 @@ namespace MyHaflinger.Treffen.Services
 {
 	public class AnmeldungMailService
 	{
+		private static readonly ConcurrentDictionary<string,string> Templates = new ConcurrentDictionary<string, string>();
+
 		private readonly ISmtpMailService _smtpMailService;
 		private readonly string _sender;
 
@@ -29,13 +32,20 @@ namespace MyHaflinger.Treffen.Services
 		{
 			string key = "MyHaflinger.Treffen.Templates." + templateKey + ".cshtml";
 
-			using (var stream = GetType().Assembly.GetManifestResourceStream(key))
+			if (!Templates.TryGetValue(key, out string templateValue))
 			{
-				using (var reader = new StreamReader(stream))
+				using (var stream = GetType().Assembly.GetManifestResourceStream(key))
 				{
-					return reader.ReadToEnd();
+					using (var reader = new StreamReader(stream))
+					{
+						templateValue = reader.ReadToEnd();
+					}
 				}
+
+				Templates.TryAdd(key, templateValue);
 			}
+
+			return templateValue;
 		}
 
 		public async Task<bool> SendStep1Mail(string urlForContinuation, string to)
