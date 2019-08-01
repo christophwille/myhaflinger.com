@@ -30,7 +30,7 @@ namespace MyHaflinger.Web.Common
 				// https://stackoverflow.com/questions/52151452/request-currentexecutionfilepath-in-asp-net-core/52152027#52152027
 				string cshtmlFilePath = context.ActionDescriptor.RelativePath; // returns e.g. /Pages/Index.cshtml
 
-				var env = context.HttpContext.RequestServices.GetService(typeof(IHostingEnvironment)) as IHostingEnvironment;
+				var env = context.HttpContext.RequestServices.GetService(typeof(IWebHostEnvironment)) as IWebHostEnvironment;
 				string fullPath = Path.Combine(env.ContentRootPath, cshtmlFilePath.Substring(1)); // must trim leading '/' otherwise absolute to root drive of app
 				var fileInfo = new FileInfo(fullPath);
 

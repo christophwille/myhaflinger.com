@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +12,6 @@ using MyHaflinger.Treffen;
 using MyHaflinger.Treffen.Services;
 using MyHaflinger.Web.Models;
 using MyHaflinger.Web.Services;
-using Newtonsoft.Json;
 
 namespace MyHaflinger.Web.Pages.Anmeldung
 {
@@ -136,7 +136,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			var dbCtx = await _dbFactory.CreateContextAsync();
 			reg = await dbCtx.RegisterParticipantAsync(reg);
 
-			string reg4Logging = JsonConvert.SerializeObject(reg, Formatting.None);
+			string reg4Logging = JsonSerializer.Serialize(reg);
 			_auditLog.Trace($"REG:S:F: Teilnehmer {reg.Name} was registered properly");
 			_auditLog.Trace($"REG:S:F:D: Teilnehmer {reg.Name} data: {reg4Logging}");
 

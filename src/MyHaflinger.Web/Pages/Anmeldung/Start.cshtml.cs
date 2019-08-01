@@ -14,12 +14,12 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 	[RequireHttps]
 	public class StartModel : PageModel
 	{
-		private AnmeldungsDbFactory DbFactory { get; }
-		public AppOptions _ao { get; }
+		private readonly AnmeldungsDbFactory _dbFactory;
+		private readonly AppOptions _ao;
 
 		public StartModel(AnmeldungsDbFactory dbFactory, AppOptions ao)
 		{
-			DbFactory = dbFactory;
+			_dbFactory = dbFactory;
 			_ao = ao;
 		}
 
@@ -48,7 +48,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 
 			string guid = Guid.NewGuid().ToString();
 
-			var ctx = await DbFactory.CreateContextAsync();
+			var ctx = await _dbFactory.CreateContextAsync();
 			await ctx.RegisterEmailChallengeAsync(EmailAddress, guid, DateTime.UtcNow);
 
 			auditLog.Trace($"REG:S:CH: Email {EmailAddress} registered for challenge");
