@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MyHaflinger.Common.Services;
 using MyHaflinger.Web.Models;
 using MyHaflinger.Web.Services;
@@ -15,10 +16,12 @@ namespace MyHaflinger.Web.Controllers
 	public class MailFuncController : Controller
 	{
 		private readonly AppOptions _ao;
+		private readonly ILogger<MailFuncController> _logger;
 
-		public MailFuncController(AppOptions ao)
+		public MailFuncController(AppOptions ao, ILogger<MailFuncController> logger)
 		{
 			_ao = ao;
+			_logger = logger;
 		}
 
 		[HttpPost]
@@ -51,13 +54,23 @@ namespace MyHaflinger.Web.Controllers
 
 		public async Task<bool> SendAnfrageFormularMail(MailJson mm, ISmtpMailService smtpMailService)
 		{
-			var engine = new RazorLightEngineBuilder()
-				.UseMemoryCachingProvider()
-				.Build();
-			
-			string msgToSend = await engine.CompileRenderAsync("anfrageTemplateKey", AnfrageTemplate, mm);
+			try
+			{
+				var engine = new RazorLightEngineBuilder()
+					.UseMemoryCachingProvider()
+					.Build();
 
-			return await smtpMailService.SendMailAsync(_ao.ContactFormTo, "myhaflinger.com Kontaktformular", msgToSend, true, _ao.MailFromAddress);
+				string msgToSend = await engine.CompileRenderAsync("anfrageTemplateKey", AnfrageTemplate, mm);
+
+				return await smtpMailService.SendMailAsync(_ao.ContactFormTo, "myhaflinger.com Kontaktformular", msgToSend, true, _ao.MailFromAddress);
+
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex.ToString());
+			}
+
+			return false;
 		}
 	}
 }

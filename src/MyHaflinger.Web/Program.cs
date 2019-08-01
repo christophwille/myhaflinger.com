@@ -1,36 +1,32 @@
-﻿//        public static void Main(string[] args)
-//        {
-//            // https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
-//            // https://github.com/NLog/NLog.Web/issues/211 (see for version dependencies)
-//            var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
-
-//            BuildWebHost(args).Run();
-//        }
-
-//        public static IWebHost BuildWebHost(string[] args) =>
-//            WebHost.CreateDefaultBuilder(args)
-//                .UseStartup<Startup>()
-//                .UseNLog()
-//                .Build();
-//    }
-// https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace MyHaflinger.Web
 {
 	public class Program
 	{
+		// https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-2
 		public static void Main(string[] args)
 		{
-			CreateHostBuilder(args).Build().Run();
+			var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+
+			try
+			{
+				logger.Debug("Starting program");
+				CreateHostBuilder(args).Build().Run();
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex, "Stopped program because of exception");
+				throw;
+			}
+			finally
+			{
+				NLog.LogManager.Shutdown();
+			}
 		}
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -38,6 +34,12 @@ namespace MyHaflinger.Web
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
-				});
+				})
+				.ConfigureLogging(logging =>
+				{
+					logging.ClearProviders();
+					logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+				})
+				.UseNLog();
 	}
 }
