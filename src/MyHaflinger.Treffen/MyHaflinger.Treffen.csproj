@@ -26,9 +26,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.5.231</Version>
+      <Version>1.6.292</Version>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="4.6.0-preview7.19362.9" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
