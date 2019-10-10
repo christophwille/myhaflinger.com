@@ -96,7 +96,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			}
 		}
 
-		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, string token)
+		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]ITemplateRenderingService templateRenderer, string token)
 		{
 			EmailAddress = await RetrieveEmailAddressForToken(token);
 
@@ -143,7 +143,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 			// TODO: Mark token as used
 
 			// Send email to registrant
-			var mm = new AnmeldungMailService(smtpMailService, _ao.MailFromAddress);
+			var mm = new AnmeldungMailService(smtpMailService, templateRenderer, _ao.MailFromAddress);
 			bool sentOkToRegistrant = await mm.SendRegCompleteMailToParticipant(reg);
 
 			// TODO: Handle mail sending erros

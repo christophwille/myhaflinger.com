@@ -3,20 +3,20 @@
 <body>
     <h1>Anmeldebest&auml;tigung</h1>
 
-    <p>Name: <br />@Model.Name</p>
-    <p>Emailadresse: <br />@Model.EmailAddress</p>
-    <p>Stra&szlig;e: <br />@Model.Street</p>
-    <p>Postleitzahl: <br />@Model.Zip</p>
-    <p>Stadt: <br />@Model.City</p>
-    <p>Land: <br />@Model.Country</p>
-    <p>Kennzeichen: <br />@Model.NumberPlate</p>
-    <p>Telefon: @Model.Phone</p>
+    <p>Name: <br />{{Name}}</p>
+    <p>Emailadresse: <br />{{EmailAddress}}</p>
+    <p>Stra&szlig;e: <br />{{Street}}</p>
+    <p>Postleitzahl: <br />{{Zip}}</p>
+    <p>Stadt: <br />{{City}}</p>
+    <p>Land: <br />{{Country}}</p>
+    <p>Kennzeichen: <br />{{NumberPlate}}</p>
+    <p>Telefon: {{Phone}}</p>
     <hr />
-    <p>Teilnehmer Freitag: @Model.PParticipantsFriday</p>
-    <p>Teilnehmer Sa/So: @Model.PParticipantsSatSun</p>
-    <p>Zu zahlender Gesamtpreis (EUR): <br />@Model.TotalPrice</p>
+    <p>Teilnehmer Freitag: {{PParticipantsFriday}}</p>
+    <p>Teilnehmer Sa/So: {{PParticipantsSatSun}}</p>
+    <p>Zu zahlender Gesamtpreis (EUR): <br />{{TotalPrice}}</p>
     <hr />
-    <p>Bemerkung: @Model.Notes</p>
+    <p>Bemerkung: {{Notes}}</p>
     <hr />
     <p>
         <b>Zahlungsinformationen</b><br/>

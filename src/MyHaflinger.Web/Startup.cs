@@ -66,6 +66,7 @@ namespace MyHaflinger.Web
 			services.AddTransient<RegistrationFlowAuditTrailService>();
 
 			services.AddTransient<ISmtpMailService, SmtpMailService>();
+			services.AddTransient<ITemplateRenderingService, HandlebarsRenderingService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

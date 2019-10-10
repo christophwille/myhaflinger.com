@@ -42,7 +42,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 		[Required(ErrorMessage = "Emailadresse muß eingegeben werden")]
 		public string EmailAddress { get; set; }
 
-		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]RegistrationFlowAuditTrailService auditLog)
+		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]ITemplateRenderingService templateRenderer, [FromServices]RegistrationFlowAuditTrailService auditLog)
 		{
 			if (!ModelState.IsValid) return Page();
 
@@ -55,7 +55,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 
 			string formularUrl = GenerateFormularUrl(HttpContext, guid);
 
-			var mm = new AnmeldungMailService(smtpMailService, _ao.MailFromAddress);
+			var mm = new AnmeldungMailService(smtpMailService, templateRenderer, _ao.MailFromAddress);
 			bool mailSentOk = await mm.SendStep1Mail(formularUrl, EmailAddress);
 
 			if (!mailSentOk)

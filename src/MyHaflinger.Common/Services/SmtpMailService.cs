@@ -6,19 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace MyHaflinger.Common.Services
 {
-	public interface ISmtpConfiguration
-	{
-		string SmtpUsername { get; set; }
-		string SmtpPassword { get; set; }
-		string SmtpHost { get; set; }
-		string SmtpPort { get; set; }
-	}
-
-	public interface ISmtpMailService
-	{
-		Task<bool> SendMailAsync(string to, string mailSubject, string message, bool isBodyHtml, string from, bool suppressExceptions = true);
-	}
-
 	public class SmtpMailService : ISmtpMailService
 	{
 		private readonly ISmtpConfiguration _smtpConfig;

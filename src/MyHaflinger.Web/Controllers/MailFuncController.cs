@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyHaflinger.Common.Services;
 using MyHaflinger.Web.Models;
-using MyHaflinger.Web.Services;
-using RazorLight;
-using RazorLight.Razor;
 
 namespace MyHaflinger.Web.Controllers
 {
@@ -25,7 +19,7 @@ namespace MyHaflinger.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Index([FromBody]MailJson mm, [FromServices] ISmtpMailService smtpMailService)
+		public async Task<IActionResult> Index([FromBody]MailJson mm, [FromServices] ISmtpMailService smtpMailService, [FromServices] ITemplateRenderingService templateRenderer)
 		{
 			if (String.IsNullOrEmpty(mm.Name) || String.IsNullOrEmpty(mm.Email) ||
 				String.IsNullOrEmpty(mm.Subject) || String.IsNullOrEmpty(mm.Message))
@@ -34,33 +28,29 @@ namespace MyHaflinger.Web.Controllers
 			}
 			else
 			{
-				await SendAnfrageFormularMail(mm, smtpMailService);
+				await SendAnfrageFormularMail(mm, smtpMailService, templateRenderer);
 			}
 
 			return Ok();
 		}
 
 		private static readonly string AnfrageTemplate = @"<!DOCTYPE html>
-					<html>
-					<body>
-						<h1>Anfrage myhaflinger.com</h1>
-						<p>Name: @Model.Name</p>
-						<p>Email: @Model.Email</p>
-						<p>Betreff: @Model.Subject</p>
-						<p>Nachricht:</p>
-						<p>@Model.Message</p>
-					</body>
-					</html>";
+		<html>
+		<body>
+			<h1>Anfrage myhaflinger.com</h1>
+			<p>Name: {{Name}}</p>
+			<p>Email: {{Email}}</p>
+			<p>Betreff: {{Subject}}</p>
+			<p>Nachricht:</p>
+			<p>{{Message}}</p>
+		</body>
+		</html>";
 
-		public async Task<bool> SendAnfrageFormularMail(MailJson mm, ISmtpMailService smtpMailService)
+		public async Task<bool> SendAnfrageFormularMail(MailJson mm, ISmtpMailService smtpMailService, ITemplateRenderingService templateRenderer)
 		{
 			try
 			{
-				var engine = new RazorLightEngineBuilder()
-					.UseMemoryCachingProvider()
-					.Build();
-
-				string msgToSend = await engine.CompileRenderAsync("anfrageTemplateKey", AnfrageTemplate, mm);
+				string msgToSend = templateRenderer.Render(AnfrageTemplate, mm);
 
 				return await smtpMailService.SendMailAsync(_ao.ContactFormTo, "myhaflinger.com Kontaktformular", msgToSend, true, _ao.MailFromAddress);
 
