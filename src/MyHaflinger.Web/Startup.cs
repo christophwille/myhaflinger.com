@@ -47,7 +47,8 @@ namespace MyHaflinger.Web
 			services.AddResponseCaching();
 
 			services.AddControllers();
-			services.AddRazorPages();
+			services.AddRazorPages()
+				.AddRazorRuntimeCompilation();
 
 			services.Configure<MvcOptions>(options =>
 			{
