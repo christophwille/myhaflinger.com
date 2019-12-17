@@ -54,6 +54,14 @@ namespace MyHaflinger.Web
 			{
 				options.Filters.Add(new RequireHttpsAttribute { Permanent = true });
 				// options.ReturnHttpNotAcceptable = false;
+
+				// https://docs.microsoft.com/en-us/aspnet/core/performance/caching/response?view=aspnetcore-3.1#responsecache-attribute
+				options.CacheProfiles.Add("Default",
+					new CacheProfile()
+					{
+						Duration = 3600,
+						Location = ResponseCacheLocation.Client
+					});
 			});
 
 			AppOptions ao = new AppOptions();

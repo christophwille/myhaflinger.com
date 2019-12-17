@@ -9,12 +9,8 @@ using MyHaflinger.Web.Common;
 
 namespace MyHaflinger.Web.Pages
 {
-	public class IndexModel : MyHaflingerBasePageModel
+	[ResponseCache(CacheProfileName = "Default")]
+	public class IndexModel : PageModel
 	{
-		// Caching is dealt with by base class
-		// [ResponseCache(Duration = 3600,Location = ResponseCacheLocation.Any)]
-		public void OnGet()
-		{
-		}
 	}
 }

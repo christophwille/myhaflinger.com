@@ -9,10 +9,8 @@ using MyHaflinger.Web.Common;
 
 namespace MyHaflinger.Web.Pages
 {
-	public class DSEModel : MyHaflingerBasePageModel
+	[ResponseCache(CacheProfileName = "Default")]
+	public class DSEModel : PageModel
 	{
-		public void OnGet()
-		{
-		}
 	}
 }

@@ -8,11 +8,8 @@ using MyHaflinger.Web.Common;
 
 namespace MyHaflinger.Web.Pages.Treffen2017
 {
-	public class IndexModel : MyHaflingerBasePageModel
+	[ResponseCache(CacheProfileName = "Default")]
+	public class IndexModel : PageModel
 	{
-		public void OnGet()
-		{
-
-		}
 	}
 }
