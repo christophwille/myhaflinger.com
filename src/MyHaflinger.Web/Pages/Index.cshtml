@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Haflingerfreunde Salzkammergut";
-    ViewData["Keywords"] = "Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Veranstaltung,Ausfahrt,Auto";
+    ViewData["Keywords"] = "Haflinger,Fahrzeug,Steyr Puch,Steyr Puch Haflinger,Oldtimer,Österreich,Salzkammergut,Haflingertreffen,Treffen,Veranstaltung,Ausfahrt,Auto,Verein,Stammtisch";
     ViewData["Description"] = "Homepage der Haflingerfreunde Salzkammergut. Informationen zu kommenden und historischen Teffen der Steyr Puch Haflinger in Bad Ischl im Salzkammergut.";
 }
 @section head {
@@ -38,6 +38,38 @@
 
 <section id="main-slider">
     <div class="owl-carousel">
+        <div class="item" style="background-image: url(images/slider/bg_illingerbergalm2016.jpg);">
+            <div class="slider-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="carousel-content">
+                                <h2>Vereinsausfahrten</h2>
+                                <p>Jedes Jahr veranstaltet unser Verein Ausfahrten f&uuml;r die Mitglieder</p>
+                                <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/")">Fotos ansehen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.item-->
+    
+        <div class="item" style="background-image: url(images/slider/bg_steirischesalmenland60jahre.jpg);">
+            <div class="slider-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="carousel-content">
+                                <h2>Steirisches Almenland</h2>
+                                <p>Treffen 60 Jahre Haflinger, vom 2. - 5. Mai 2019</p>
+                                <a class="btn btn-primary btn-lg" href="@Href("/Fotos/SteirischesAlmenland60Jahre/")">Fotos ansehen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.item-->
+
         <div class="item" style="background-image: url(images/slider/bg_teaser2017.jpg);">
             <div class="slider-inner">
                 <div class="container">
@@ -46,7 +78,7 @@
                             <div class="carousel-content">
                                 <h2>Treffen 2017</h2>
                                 <p>Das 9. Internationale Salzkammergut Haflingertreffen fand im Juni 2017 statt.</p>
-                                <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen</a>
+                                <a class="btn btn-primary btn-lg" href="@Href("/treffen2017/")">Informationen, Fotos und Filme</a>
                             </div>
                         </div>
                     </div>
@@ -54,21 +86,6 @@
             </div>
         </div><!--/.item-->
 
-        <div class="item" style="background-image: url(images/slider/bg_probeausfahrten16.jpg);">
-            <div class="slider-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="carousel-content">
-                                <h2>Probeausfahrten</h2>
-                                <p>Fotos zu den Probeausfahrten f&uuml;r unser Treffen 2017.</p>
-                                <a class="btn btn-primary btn-lg" href="@Href("/Fotos/Verein/Probeausfahrten2016/")">Fotos ansehen</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/.item-->
     </div><!--/.owl-carousel-->
 </section><!--/#main-slider-->
 
