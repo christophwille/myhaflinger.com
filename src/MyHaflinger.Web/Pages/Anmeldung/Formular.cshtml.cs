@@ -78,8 +78,10 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 		}
 
 		// URL sample: http://myhaflinger.com/Anmeldung/Formular?token=2a75f00f-9e42-4698-8f59-60a9ff56cd0e
-		public async Task OnGetAsync(string token)
+		public async Task<IActionResult> OnGetAsync(string token)
 		{
+			if (!_ao.RegistrationOpen) return RedirectToPage("/Index");
+
 			string emailAddress = await RetrieveEmailAddressForToken(token);
 
 			if (String.IsNullOrWhiteSpace(emailAddress))
@@ -94,10 +96,14 @@ namespace MyHaflinger.Web.Pages.Anmeldung
 				ParticipantsSatSun = 1;
 				NextFormAction = FormActionEnum.ShowForm;
 			}
+
+			return Page();
 		}
 
 		public async Task<IActionResult> OnPostAsync([FromServices]ISmtpMailService smtpMailService, [FromServices]ITemplateRenderingService templateRenderer, string token)
 		{
+			if (!_ao.RegistrationOpen) return RedirectToPage("/Index");
+
 			EmailAddress = await RetrieveEmailAddressForToken(token);
 
 			// This is over-the-top security in our simple reg case, just to get rid of the overly curious playing with the query string
