@@ -9,9 +9,8 @@ namespace MyHaflinger.Common.Services
 	{
 		public string Render(string source, object data)
 		{
-			Func<object, string> template = Handlebars.Compile(source);
-			string result = template(data);
-			return result;
+			var template = Handlebars.Compile(source);
+			return template(data);
 		}
 	}
 }

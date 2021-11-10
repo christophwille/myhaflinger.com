@@ -17,14 +17,12 @@ namespace MyHaflinger.Common
 
 		public static string HashPassword(string password)
 		{
-			var cryptoProvider = new RNGCryptoServiceProvider();
-			byte[] salt = new byte[SaltByteSize];
-			cryptoProvider.GetBytes(salt);
+			byte[] salt = RandomNumberGenerator.GetBytes(SaltByteSize);
 
 			var hash = GetPbkdf2Bytes(password, salt, Pbkdf2Iterations, HashByteSize);
 			return Pbkdf2Iterations + ":" +
-			       Convert.ToBase64String(salt) + ":" +
-			       Convert.ToBase64String(hash);
+				   Convert.ToBase64String(salt) + ":" +
+				   Convert.ToBase64String(hash);
 		}
 
 		public static bool ValidatePassword(string password, string correctHash)
@@ -51,8 +49,10 @@ namespace MyHaflinger.Common
 
 		private static byte[] GetPbkdf2Bytes(string password, byte[] salt, int iterations, int outputBytes)
 		{
-			var pbkdf2 = new Rfc2898DeriveBytes(password, salt);
-			pbkdf2.IterationCount = iterations;
+			var pbkdf2 = new Rfc2898DeriveBytes(password, salt)
+			{
+				IterationCount = iterations
+			};
 			return pbkdf2.GetBytes(outputBytes);
 		}
 	}
