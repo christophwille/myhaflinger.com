@@ -18,6 +18,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore src/myhaflinger.sln
+      run: dotnet restore src/MyHaflinger.sln
     - name: Build
-      run: dotnet build src/myhaflinger.sln --no-restore
+      run: dotnet build src/MyHaflinger.sln --no-restore
