@@ -40,8 +40,6 @@ namespace MyHaflinger.Treffen.AuthX
 			return null;
 		}
 
-		public const string AuthenticationScheme = "Cookies";
-
 		// https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&tabs=aspnetcore2x
 		public ClaimsIdentity CreateIdentity(string username, string role)
 		{
@@ -52,7 +50,7 @@ namespace MyHaflinger.Treffen.AuthX
 				new Claim(ClaimTypes.Role, role),
 			};
 
-			return new ClaimsIdentity(claims, AuthenticationScheme);
+			return new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 		}
 	}
 }

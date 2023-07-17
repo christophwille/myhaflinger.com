@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MyHaflinger.Common;
 using MyHaflinger.Web.Services;
 
 namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
@@ -22,7 +22,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 		[Required]
 		public string Password { get; set; }
 
-		public async Task<IActionResult> OnPostAsync([FromServices]AnmeldungsAuthenticationFactory authFactory, [FromServices]RegistrationFlowAuditTrailService auditLog)
+		public async Task<IActionResult> OnPostAsync([FromServices] AnmeldungsAuthenticationFactory authFactory, [FromServices] RegistrationFlowAuditTrailService auditLog)
 		{
 			if (!ModelState.IsValid) return Page();
 

@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
-    <None Include="D:\hafiweb\myhaflinger.com\src\MyHaflinger.Web\.editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +27,6 @@
 
   <ItemGroup>
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Remove="D:\hafiweb\myhaflinger.com\src\MyHaflinger.Web\.editorconfig" />
   </ItemGroup>
 
 </Project>
