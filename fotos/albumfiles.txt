@@ -6,20 +6,8 @@
 # Note: The target path can reference files and directories in other locations and thereby
 # allows you to compile albums consisting of files from several different locations.
 
-Treffen2017	D:\hafiweb\fotos\prepped\Treffen2017	1498407939
-Verein	D:\hafiweb\fotos\prepped\Verein	1447320544
-StAnton2019	D:\hafiweb\fotos\prepped\StAnton2019	1567872292
-SteirischesAlmenland60Jahre	D:\hafiweb\fotos\prepped\SteirischesAlmenland60Jahre	1558173361
-Soell2018	D:\hafiweb\fotos\prepped\Soell2018	1528528963
-Schweiz2017	D:\hafiweb\fotos\prepped\Schweiz2017	1503848659
-Soell2015	D:\hafiweb\fotos\prepped\Soell2015	1447251097
-Hafling2015	D:\hafiweb\fotos\prepped\Hafling2015	1447251097
-Kiefersfelden2015	D:\hafiweb\fotos\prepped\Kiefersfelden2015	1452339210
-Treffen2014	D:\hafiweb\fotos\prepped\Treffen2014	1447251097
-Rutzendorf2014	D:\hafiweb\fotos\prepped\Rutzendorf2014	1448191304
-Soell2013	D:\hafiweb\fotos\prepped\Soell2013	1447322981
-Groeden2012	D:\hafiweb\fotos\prepped\Groeden2012	1448180251
-Treffen2011	D:\hafiweb\fotos\prepped\Treffen 2011	1448191304
-50JahreStiefern2009	D:\hafiweb\fotos\prepped\50JahreStiefern2009	1448365142
-Hafling2008	D:\hafiweb\fotos\prepped\Hafling2008	1449400675
-SteyrPuchHaflingerLogo.png	D:\hafiweb\fotos\prepped\SteyrPuchHaflingerLogo.png	1447251097
+Hafling2022	D:\hafiweb\fotos\prepped\Hafling2022
+Hafling2015	D:\hafiweb\fotos\prepped\Hafling2015
+Soell2015	D:\hafiweb\fotos\prepped\Soell2015
+Treffen2014	D:\hafiweb\fotos\prepped\Treffen2014
+SteyrPuchHaflingerLogo.png	D:\hafiweb\fotos\prepped\SteyrPuchHaflingerLogo.png

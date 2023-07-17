@@ -1,7 +1,7 @@
-Location:
+# Location
 
 C:\Users\<USERNAME>\Documents\My Albums\Fotos
 
-Not included:
+## Not included
 
 .jalbum folder
