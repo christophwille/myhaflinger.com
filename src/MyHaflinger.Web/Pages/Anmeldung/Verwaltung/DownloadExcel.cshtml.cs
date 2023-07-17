@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
@@ -15,7 +13,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 	[RequireHttps]
 	public class DownloadExcelModel : PageModel
 	{
-		public async Task<IActionResult> OnGetAsync([FromServices]AnmeldungsDbFactory dbFactory)
+		public async Task<IActionResult> OnGetAsync([FromServices] AnmeldungsDbFactory dbFactory)
 		{
 			// https://github.com/closedxml/closedxml/wiki/Copying-IEnumerable-Collections
 			var ctx = await dbFactory.CreateContextAsync();
@@ -40,7 +38,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 				r.IntPaymentReceivedDate,
 			}).OrderBy(r => r.Id);
 
-			using (XLWorkbook wb = new XLWorkbook(XLEventTracking.Disabled))
+			using (XLWorkbook wb = new XLWorkbook())
 			{
 				var ws = wb.Worksheets.Add("Teilnehmer");
 
@@ -62,7 +60,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 
 				ws.Range(1, 1, 1, 15).AddToNamed("Titles");
 
-				ws.Cell(2, 1).Value = regTrimmed;
+				ws.Cell(2, 1).InsertData(regTrimmed);
 
 				// Title formatting
 				var titlesStyle = wb.Style;

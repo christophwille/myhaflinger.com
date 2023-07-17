@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using MyHaflinger.Common;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -41,6 +40,8 @@ namespace MyHaflinger.Treffen.AuthX
 			return null;
 		}
 
+		public const string AuthenticationScheme = "Cookies";
+
 		// https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&tabs=aspnetcore2x
 		public ClaimsIdentity CreateIdentity(string username, string role)
 		{
@@ -51,7 +52,7 @@ namespace MyHaflinger.Treffen.AuthX
 				new Claim(ClaimTypes.Role, role),
 			};
 
-			return new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+			return new ClaimsIdentity(claims, AuthenticationScheme);
 		}
 	}
 }
