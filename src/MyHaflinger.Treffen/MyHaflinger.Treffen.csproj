@@ -1,40 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Templates\Anmeldung_FinalStep.cshtml" />
-    <None Remove="Templates\Anmeldung_New_2RegDesk.cshtml" />
-    <None Remove="Templates\Anmeldung_Step1_Email.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Templates\Anmeldung_FinalStep.cshtml" />
+		<None Remove="Templates\Anmeldung_New_2RegDesk.cshtml" />
+		<None Remove="Templates\Anmeldung_Step1_Email.cshtml" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Templates\Anmeldung_FinalStep.cshtml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Templates\Anmeldung_New_2RegDesk.cshtml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Templates\Anmeldung_Step1_Email.cshtml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Templates\Anmeldung_FinalStep.cshtml">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Templates\Anmeldung_New_2RegDesk.cshtml">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Templates\Anmeldung_Step1_Email.cshtml">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl">
-      <Version>1.9.172</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="sqlite-net-pcl">
+			<Version>1.9.172</Version>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Models\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MyHaflinger.Common\MyHaflinger.Common.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MyHaflinger.Common\MyHaflinger.Common.csproj" />
+	</ItemGroup>
 
 </Project>
