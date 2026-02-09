@@ -49,11 +49,7 @@ namespace MyHaflinger.Common
 
 		private static byte[] GetPbkdf2Bytes(string password, byte[] salt, int iterations, int outputBytes)
 		{
-			var pbkdf2 = new Rfc2898DeriveBytes(password, salt)
-			{
-				IterationCount = iterations
-			};
-			return pbkdf2.GetBytes(outputBytes);
+			return Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA1, outputBytes);
 		}
 	}
 }

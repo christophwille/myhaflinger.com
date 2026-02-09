@@ -34,8 +34,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddResponseCaching();
 
-builder.Services.AddRazorPages()
-	.AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages();
 
 builder.Services.Configure<MvcOptions>(options =>
 {

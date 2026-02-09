@@ -68,7 +68,7 @@ namespace MyHaflinger.Web.Pages.Anmeldung.Verwaltung
 				titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 				titlesStyle.Fill.BackgroundColor = XLColor.DimGray;
 
-				wb.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
+				wb.DefinedNames.DefinedName("Titles").Ranges.Style = titlesStyle;
 
 				ws.Columns().AdjustToContents();
 
